@@ -1,18 +1,44 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Post v-for="post in posts" :key="post.title" :post="post" :preview="false"></Post>
+    <div class="spinner" v-if="loading">
+      <Spinner></Spinner>
+      <p>Loading</p>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Post from '../components/Post'
+import FirebaseService from '../services/firebase.service'
+import Spinner from '../components/Spinner'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    Spinner,
+    Post
+  },
+  data: function () {
+    return {
+      loading: true,
+      posts: []
+    }
+  },
+  created () {
+    FirebaseService.getPosts().subscribe(posts => {
+      this.posts = posts
+      this.loading = false
+    })
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import "../sass/abstracts/mixins";
+.spinner {
+  text-align: center;
+  @include absCenter();
+}
+</style>

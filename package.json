@@ -9,10 +9,15 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "firebase": "^6.2.0",
+    "rxjs": "^6.5.2",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.3"
+    "vue-router": "^3.0.3",
+    "vuefire": "^2.0.0",
+    "vuetify": "^1.5.16"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-service": "^3.8.0",
