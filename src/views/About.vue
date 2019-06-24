@@ -5,8 +5,11 @@
       Hey there, thanks for stopping by.<br><br>
       A Software Engineer by fault and a Poet by fate, who likes to spent 1/3rd of the day cuddling with laptop writing code.
       The most exciting part of my day has to be the one when I'm writing my thoughts in rhythm, I mean it is definitely something that turns me on.
-      With Alternative Rock / Pop Rock music on Spotify, I like to tap the keys around and end up writing what people call Poems.<br><br>
-      In this world full of Ed Sheeran fans, I guess I'm still the Old School <b>Goo Goo Dolls</b> fan, who is yet to give up listening to Iris.<br><br>
+      With Alternative Rock / Pop Rock music on Spotify, I like to tap the keys around and end up writing what people call Poems.
+      In this world full of Ed Sheeran fans, I guess I'm still the Old School Goo Goo Dolls fan, who is yet to give up listening to Iris.<br><br>
+      Not a bookworm, but I just love to read love stories and those fantasy fictional books. Not a lover, but I like to talk about love and how does it feels
+      to end up spending your entire life with someone you love. Not a talkative brat, but I like to talk to strangers about what they think about life? Afterall <b>One IDEA can change your life</b>.<br><br>
+      I'm a orthodox mess, if I were asked to brief myself, but I truly love the way I have been and I currently am.<br><br>
     </p>
     <h2>Why I started The Rhyming Reasons?</h2>
     <p>

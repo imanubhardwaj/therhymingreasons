@@ -1,8 +1,10 @@
 import { database } from 'firebase'
-import { Observable } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
 
-const FirebaseService = {
-  getPosts: function () {
+export class FirebaseService {
+  static searchQuery = new BehaviorSubject('');
+
+  getPosts () {
     return new Observable(subscriber => {
       database().ref().child('posts').on('value', data => {
         const posts = []

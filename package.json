@@ -13,7 +13,6 @@
     "rxjs": "^6.5.2",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
-    "vuefire": "^2.0.0",
     "vuetify": "^1.5.16"
   },
   "devDependencies": {
