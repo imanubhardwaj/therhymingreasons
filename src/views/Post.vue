@@ -10,15 +10,29 @@
       <br>
       <span><v-icon>fa-tags</v-icon>{{post.tags}}</span>
     </div>
-    <label for="comment-box">Leave a comment</label>
-    <textarea id="comment-box" placeholder="Type your comment here"></textarea>
+<!--    <label for="comment-box">Leave a comment</label>-->
+<!--    <textarea id="comment-box" placeholder="Type your comment here"></textarea>-->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import FirebaseService from '../services/firebase.service'
+
 export default {
-  name: 'post'
+  name: 'post',
+  beforeRouteEnter: function (to, from, next) {
+    (new FirebaseService()).getPost(to.params.postId).subscribe(post => {
+      next(v => {
+        v.post = post
+      })
+    })
+  },
+  data: function () {
+    return {
+      post: {}
+    }
+  }
 }
 </script>
 

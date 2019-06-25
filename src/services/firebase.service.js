@@ -17,6 +17,21 @@ export class FirebaseService {
       }, error => subscriber.error(error))
     })
   }
+
+  getPost (slug) {
+    return new Observable(subscriber => {
+      database().ref().child('posts').orderByChild('slug').equalTo(slug)
+        .on('value', data => {
+          let post = {}
+          if (data && data.toJSON()) {
+            const json = data.toJSON()
+            const key = Object.keys(json)[0]
+            post = json[key]
+          }
+          subscriber.next(post)
+        })
+    })
+  }
 }
 
 export default FirebaseService

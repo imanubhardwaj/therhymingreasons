@@ -19,7 +19,7 @@ export default {
   name: 'post',
   methods: {
     openPost: function () {
-      this.$router.push({ name: 'post', params: { postId: this.post.slug } })
+      this.$router.push({ name: 'posts', params: { postId: this.post.slug } })
     }
   },
   props: {
