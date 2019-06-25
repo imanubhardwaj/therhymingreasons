@@ -1,7 +1,8 @@
 <template>
   <div class="home">
-    <Search class="mobile-search-bar"></Search>
+    <Search :animate="false" class="mobile-search-bar"></Search>
     <Post v-for="post in filteredPosts" :key="post.title" :post="post" :preview="false"></Post>
+    <p class="no-posts" v-if="!filteredPosts.length">No Posts Found !</p>
     <div class="text-xs-center" v-if="!loading && totalPages > 1">
       <v-pagination
         v-model="currentPage"
@@ -80,6 +81,10 @@ export default {
 .mobile-search-bar {
   display: flex;
   margin-top: 1rem;
+}
+.no-posts {
+  margin-top: 2em;
+  font-size: 1.5em;
 }
 /deep/.v-pagination {
   button:focus {

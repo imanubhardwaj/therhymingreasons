@@ -1,6 +1,6 @@
 <template>
   <div class="post">
-    <h1 class="heading">{{post.title}}</h1>
+    <h1 class="heading" @click="openPost">{{post.title}}</h1>
     <img class="image" v-if="post.img" :src="post.img" alt="Post Image">
     <p v-html="post.content" class="content"></p>
     <div class="meta">
@@ -17,6 +17,11 @@
 // @ is an alias to /src
 export default {
   name: 'post',
+  methods: {
+    openPost: function () {
+      this.$router.push({ name: 'post', params: { postId: this.post.slug } })
+    }
+  },
   props: {
     post: {
       required: true
@@ -36,6 +41,7 @@ export default {
   margin: 2em 0;
 
   .heading {
+    cursor: pointer;
     font-weight: 500;
     font-size: 1.7em !important;
 

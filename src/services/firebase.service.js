@@ -10,7 +10,7 @@ export class FirebaseService {
         const posts = []
         if (data && data.toJSON()) {
           const json = data.toJSON()
-          Object.keys(json).forEach(key => posts.push({ ...json[key], id: key }))
+          Object.keys(json).forEach(key => posts.push(json[key]))
         }
         posts.sort((post1, post2) => new Date(post2.date).getTime() - new Date(post1.date).getTime())
         subscriber.next(posts)

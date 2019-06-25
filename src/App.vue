@@ -7,8 +7,8 @@
         <p class="tagline">Rhymes for a Reason</p>
       </div>
       <div class="extras">
-        <Search v-if="showSearch" class="desktop-search-bar"></Search>
-        <v-icon @click="isPagesListOpen = !isPagesListOpen">{{isPagesListOpen ? 'fa-times' : 'fa-bars'}}</v-icon>
+        <Search :animate="true" v-if="showSearch" class="desktop-search-bar"></Search>
+        <v-icon class="menu" @click="isPagesListOpen = !isPagesListOpen">{{isPagesListOpen ? 'fa-times' : 'fa-bars'}}</v-icon>
       </div>
     </header>
     <transition name="slide">
@@ -79,6 +79,10 @@ export default {
 
     .v-icon {
       cursor: pointer;
+    }
+
+    .menu {
+      width: 21px;
     }
   }
 
