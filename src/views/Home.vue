@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Search :animate="false" class="mobile-search-bar"></Search>
-    <Post v-for="post in filteredPosts" :key="post.title" :post="post" :preview="false"></Post>
+    <Post v-for="post in filteredPosts" :key="post.title" :post="post" :showComment="true"></Post>
     <p class="no-posts" v-if="!filteredPosts.length && !loading">No Posts Found !</p>
     <div class="text-xs-center" v-if="!loading && totalPages > 1">
       <v-pagination
@@ -81,6 +81,9 @@ export default {
 .mobile-search-bar {
   display: flex;
   margin-top: 1rem;
+}
+/deep/.post {
+  margin: 2em 0 5em 0;
 }
 .no-posts {
   margin-top: 2em;

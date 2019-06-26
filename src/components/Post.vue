@@ -10,6 +10,15 @@
       <br>
       <span><v-icon>fa-tags</v-icon>{{post.tags}}</span>
     </div>
+    <div class="share">
+      <span v-if="showComment" @click="navigateToComment"><v-icon>fa-comment</v-icon>Comment</span>
+      <div class="share">
+        <p><v-icon>fa-share</v-icon>&nbsp;Share</p>
+        <a :href="getFacebookUrl()" target="_blank"><v-icon style="color: #3b5998">fab fa-facebook</v-icon></a>
+        <a :href="getTwitterUrl()" target="_blank"><v-icon style="color: #1DA1F2">fab fa-twitter</v-icon></a>
+        <a :href="getWhatsappUrl()" target="_blank"><v-icon style="color: #25D366">fab fa-whatsapp</v-icon></a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,15 +29,27 @@ export default {
   methods: {
     openPost: function () {
       this.$router.push({ name: 'posts', params: { postId: this.post.slug } })
+    },
+    getFacebookUrl: function () {
+      return `https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}/posts/${this.post.slug}&t=${encodeURI(this.post.title)}`
+    },
+    getTwitterUrl: function () {
+      return `https://twitter.com/intent/tweet?url=${window.location.origin}/posts/${this.post.slug}&text=${encodeURI(this.post.title)}`
+    },
+    getWhatsappUrl: function () {
+      return `https://wa.me/?text=%2AThe%20Rhyming%20Reasons%2A%0A%0A${encodeURI(this.post.title)}%0A%0A${window.location.origin}/posts/${this.post.slug}`
+    },
+    navigateToComment: function () {
+      this.$router.push({ name: 'posts', params: { postId: this.post.slug }, hash: 'comment-box' })
     }
   },
   props: {
     post: {
       required: true
     },
-    preview: {
-      type: Boolean,
-      required: true
+    showComment: {
+      required: true,
+      type: Boolean
     }
   }
 }
@@ -82,6 +103,34 @@ export default {
   .v-icon {
     font-size: 18px;
     margin-right: 5px;
+  }
+
+  .share {
+    margin-top: 1em;
+    @include fx-layout-with-gap(row, 1.25em);
+    @include fx-layout-alignment(flex-start, center);
+
+    span {
+      cursor: pointer;
+    }
+
+    .share {
+      margin-top: 0;
+
+      p {
+        margin-bottom: 0;
+      }
+
+      a {
+        height: 21px;
+        outline: none;
+        cursor: pointer;
+
+        .v-icon {
+          font-size: 1.5em;
+        }
+      }
+    }
   }
 
   @include respond(tab) {

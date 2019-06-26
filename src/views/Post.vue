@@ -4,23 +4,14 @@
       <Spinner></Spinner>
       <p>Loading</p>
     </div>
-    <h1 class="heading" v-if="!loading">{{post.title}}</h1>
-    <img class="image" v-if="post.img" :src="post.img" alt="Post Image">
-    <p v-html="post.content" class="content"></p>
-    <div class="meta" v-if="!loading">
-      <span><v-icon>fa-user</v-icon>{{post.author}}</span>
-      <span><v-icon>fa-clock</v-icon>{{post.date}}</span>
-      <span><v-icon>fa-folder</v-icon>{{post.category}}</span>
-      <br>
-      <span><v-icon>fa-tags</v-icon>{{post.tags}}</span>
-    </div>
-    <div class="comment-box" v-if="!loading">
-      <label for="comment-box">Leave a comment</label>
+    <Post :post="post" :showComment="false"></Post>
+    <div id="comment-box" class="comment-box" v-if="!loading">
+      <label for="comment">Leave a comment</label>
       <div class="input-container name">
         <input v-model="name" placeholder="Type your name here" type="text" required>
       </div>
       <div class="input-container">
-        <textarea id="comment-box" v-model="comment" placeholder="Type your comment here" required></textarea>
+        <textarea id="comment" v-model="comment" placeholder="Type your comment here" required></textarea>
       </div>
       <button class="post-btn" :disabled="!name || !comment" @click="postComment">Post Comment</button>
     </div>
@@ -37,12 +28,14 @@ import FirebaseService from '../services/firebase.service'
 import Spinner from '../components/Spinner'
 import moment from 'moment'
 import Comment from '../components/Comment'
+import Post from '../components/Post'
 
 export default {
   name: 'post',
   components: {
     Comment,
-    Spinner
+    Spinner,
+    Post
   },
   created: function () {
     (new FirebaseService()).getPost(this.$route.params.postId).subscribe(post => {
