@@ -4,7 +4,7 @@
       <Spinner></Spinner>
       <p>Loading</p>
     </div>
-    <Post :post="post" :showComment="false"></Post>
+    <Post v-if="!loading" :post="post" :showComment="false"></Post>
     <div id="comment-box" class="comment-box" v-if="!loading">
       <label for="comment">Leave a comment</label>
       <div class="input-container name">
@@ -76,6 +76,7 @@ export default {
   @import "../sass/flex-mixins/flex-styles";
   .post {
     margin: 2em 0;
+    min-height: 40vh;
 
     .spinner {
       text-align: center;

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Search :animate="false" class="mobile-search-bar"></Search>
+    <Search :animate="false" class="mobile-search-bar" v-if="!loading"></Search>
     <Post v-for="post in filteredPosts" :key="post.title" :post="post" :showComment="true"></Post>
     <p class="no-posts" v-if="!filteredPosts.length && !loading">No Posts Found !</p>
     <div class="text-xs-center" v-if="!loading && totalPages > 1">
@@ -74,6 +74,9 @@ export default {
 <style lang="scss" scoped>
 @import "../sass/abstracts/mixins";
 @import "../sass/flex-mixins/flex-styles";
+.home {
+  min-height: 40vh;
+}
 .spinner {
   text-align: center;
   @include absCenter();
