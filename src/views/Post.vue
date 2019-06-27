@@ -100,8 +100,8 @@ export default {
     img.image {
       margin-top: 3em;
       width: 100%;
-      object-fit: contain;
       border-radius: 5px;
+      object-fit: contain;
     }
 
     p.content {
