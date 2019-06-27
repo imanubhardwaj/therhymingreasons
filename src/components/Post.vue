@@ -4,20 +4,19 @@
     <img class="image" v-if="post.img" :src="post.img" alt="Post Image">
     <p v-html="post.content" class="content"></p>
     <div class="meta">
-      <span><v-icon>fa-user</v-icon>{{post.author}}</span>
+      <span class="link" @click="navigateToAbout"><v-icon>fa-user</v-icon>{{post.author}}</span>
       <span><v-icon>fa-clock</v-icon>{{post.date}}</span>
-      <span><v-icon>fa-folder</v-icon>{{post.category}}</span>
+<!--      <span><v-icon>fa-folder</v-icon>{{post.category}}</span>-->
       <br>
       <span><v-icon>fa-tags</v-icon>{{post.tags}}</span>
+      <span class="link" v-if="showComment" @click="navigateToComment"><v-icon>fa-comment</v-icon>Comment</span>
     </div>
     <div class="share">
-      <span v-if="showComment" @click="navigateToComment"><v-icon>fa-comment</v-icon>Comment</span>
-      <div class="share">
-        <p><v-icon>fa-share</v-icon>&nbsp;Share</p>
-        <a :href="getFacebookUrl()" target="_blank"><v-icon style="color: #3b5998">fab fa-facebook</v-icon></a>
-        <a :href="getTwitterUrl()" target="_blank"><v-icon style="color: #1DA1F2">fab fa-twitter</v-icon></a>
-        <a :href="getWhatsappUrl()" target="_blank"><v-icon style="color: #25D366">fab fa-whatsapp</v-icon></a>
-      </div>
+      <p><v-icon>fa-share</v-icon>&nbsp;Share</p>
+      <a :href="getFacebookUrl()" target="_blank"><v-icon style="color: #3b5998">fab fa-facebook</v-icon></a>
+      <a :href="getTwitterUrl()" target="_blank"><v-icon style="color: #1DA1F2">fab fa-twitter</v-icon></a>
+      <a :href="getWhatsappUrl()" target="_blank"><v-icon style="color: #25D366">fab fa-whatsapp</v-icon></a>
+      <a :href="getMailUrl()" target="_blank"><v-icon style="color: #333333">fa-envelope</v-icon></a>
     </div>
   </div>
 </template>
@@ -39,8 +38,14 @@ export default {
     getWhatsappUrl: function () {
       return `https://wa.me/?text=%2AThe%20Rhyming%20Reasons%2A%0A%0A${encodeURI(this.post.title)}%0A%0A${window.location.origin}/posts/${this.post.slug}`
     },
+    getMailUrl: function () {
+      return `mailto:?subject=${encodeURI(this.post.title + ' by The Rhyming Reasons')}&body=${encodeURI('Read ' + this.post.title + ' at ' + window.location.origin + '/posts/' + this.post.slug)}`
+    },
     navigateToComment: function () {
       this.$router.push({ name: 'posts', params: { postId: this.post.slug }, hash: 'comment-box' })
+    },
+    navigateToAbout: function () {
+      this.$router.push({ name: 'about' })
     }
   },
   props: {
@@ -98,6 +103,10 @@ export default {
       margin-right: 1.25em;
       margin-bottom: 1em;
     }
+
+    .comment {
+      cursor: pointer;
+    }
   }
 
   .v-icon {
@@ -110,25 +119,17 @@ export default {
     @include fx-layout-with-gap(row, 1.25em);
     @include fx-layout-alignment(flex-start, center);
 
-    span {
-      cursor: pointer;
+    p {
+      margin-bottom: 0;
     }
 
-    .share {
-      margin-top: 0;
+    a {
+      height: 21px;
+      outline: none;
+      cursor: pointer;
 
-      p {
-        margin-bottom: 0;
-      }
-
-      a {
-        height: 21px;
-        outline: none;
-        cursor: pointer;
-
-        .v-icon {
-          font-size: 1.5em;
-        }
+      .v-icon {
+        font-size: 1.5em;
       }
     }
   }
