@@ -3,7 +3,7 @@
     <img class="bg-img" src="./assets/bg.png" alt="Nature">
     <header class="nav">
       <div>
-        <h1><a class="link" href="https://therhymingreasons.com" rel="home">The Rhyming Reasons</a></h1>
+        <h1><router-link class="link" to="/">The Rhyming Reasons</router-link></h1>
         <p class="tagline">Rhymes for a Reason</p>
       </div>
       <div class="extras">
@@ -55,8 +55,12 @@ export default {
   @include fx-layout-alignment(space-between, baseline);
 
   h1 {
-    font-weight: 400;
     margin: 0 0.5em 0.5em 0;
+
+    a {
+      font-weight: 400 !important;
+      font-size: 1em !important;
+    }
 
     &::after {
       background: #767676;
