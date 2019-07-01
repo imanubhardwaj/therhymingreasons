@@ -15,7 +15,7 @@
       <p><v-icon>fa-share</v-icon>&nbsp;Share</p>
       <a :href="getFacebookUrl()" target="_blank"><v-icon style="color: #3b5998">fab fa-facebook</v-icon></a>
       <a :href="getTwitterUrl()" target="_blank"><v-icon style="color: #1DA1F2">fab fa-twitter</v-icon></a>
-      <a :href="getWhatsappUrl()" target="_blank"><v-icon style="color: #25D366">fab fa-whatsapp</v-icon></a>
+      <a :href="getWhatsappUrl()" data-action="share/whatsapp/share" target="_blank"><v-icon style="color: #25D366">fab fa-whatsapp</v-icon></a>
       <a :href="getMailUrl()" target="_blank"><v-icon style="color: #333333">fa-envelope</v-icon></a>
     </div>
   </div>
@@ -36,7 +36,7 @@ export default {
       return `https://twitter.com/intent/tweet?url=${window.location.origin}/posts/${this.post.slug}&text=${encodeURI(this.post.title)}`
     },
     getWhatsappUrl: function () {
-      return `https://wa.me/?text=%2AThe%20Rhyming%20Reasons%2A%0A%0A${encodeURI(this.post.title)}%0A%0A${window.location.origin}/posts/${this.post.slug}`
+      return `https://wa.me?text=%2AThe%20Rhyming%20Reasons%2A%0A%0A${encodeURI(this.post.title)}%0A%0A${window.location.origin}/posts/${this.post.slug}`
     },
     getMailUrl: function () {
       return `mailto:?subject=${encodeURI(this.post.title + ' by The Rhyming Reasons')}&body=${encodeURI('Read ' + this.post.title + ' at ' + window.location.origin + '/posts/' + this.post.slug)}`
