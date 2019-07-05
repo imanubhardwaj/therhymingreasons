@@ -9,7 +9,7 @@
         <p class="tagline">Rhymes for a Reason</p>
       </div>
       <div class="extras">
-        <SearchComponent :animate="true" v-if="showSearch" class="desktop-search-bar"></SearchComponent>
+        <SearchComponent :animate="true" v-if="showSearch()" class="desktop-search-bar"></SearchComponent>
         <v-icon class="menu" @click="isPagesListOpen = !isPagesListOpen">{{isPagesListOpen ? 'fa-times' :
           'fa-bars'}}
         </v-icon>
