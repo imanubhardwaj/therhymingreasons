@@ -1,11 +1,11 @@
 import {database} from 'firebase'
-import {BehaviorSubject, Observable} from 'rxjs'
+import {Subject, Observable} from 'rxjs'
 import {Post} from "@/models/post";
 import {Comment} from "@/models/comment";
 
 export class FirebaseService {
   private static instance: FirebaseService;
-  public searchQuery = new BehaviorSubject('');
+  public searchQuery = new Subject<string>();
 
   private constructor() {}
 
