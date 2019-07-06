@@ -5,7 +5,7 @@
     <p v-html="post.content" class="content"></p>
     <div class="meta">
       <span class="link" @click="navigateToAbout"><v-icon>fa-user</v-icon>{{post.author}}</span>
-      <span><v-icon>fa-clock</v-icon>{{post.date}}</span>
+      <span><v-icon>fa-clock</v-icon>{{getDate(post.date)}}</span>
       <br>
       <span><v-icon>fa-tags</v-icon>{{post.tags}}</span>
       <span class="link" v-if="showComment" @click="navigateToComment"><v-icon>fa-comment</v-icon>Comment</span>
@@ -24,6 +24,7 @@
     import {Component, Prop, Vue} from "vue-property-decorator";
     import {Post} from "@/models/post";
     import {MobileDetectionMixin} from "@/mixins/mobile-detection.mixin";
+    import moment from 'moment';
 
 @Component({
   mixins: [MobileDetectionMixin]
@@ -34,6 +35,10 @@ export default class PostComponent extends Vue {
 
    openPost() {
       this.$router.push({ name: 'posts', params: { postId: this.post.slug } })
+   }
+
+   getDate(timestamp: number) {
+      return moment(timestamp).format('MMMM DD, YYYY');
    }
 
    getFacebookUrl() {
