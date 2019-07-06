@@ -1,8 +1,8 @@
 import { database } from 'firebase'
-import { BehaviorSubject, Observable } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 
 export class FirebaseService {
-  static searchQuery = new BehaviorSubject('');
+  static searchQuery = new Subject();
 
   getPosts () {
     return new Observable(subscriber => {
