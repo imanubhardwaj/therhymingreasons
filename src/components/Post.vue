@@ -5,7 +5,7 @@
     <p v-html="post.content" class="content"></p>
     <div class="meta">
       <span class="link" @click="navigateToAbout"><v-icon>fa-user</v-icon>{{post.author}}</span>
-      <span><v-icon>fa-clock</v-icon>{{post.date}}</span>
+      <span><v-icon>fa-clock</v-icon>{{getPostDate(post.date)}}</span>
 <!--      <span><v-icon>fa-folder</v-icon>{{post.category}}</span>-->
       <br>
       <span><v-icon>fa-tags</v-icon>{{post.tags}}</span>
@@ -22,12 +22,16 @@
 </template>
 
 <script>
+import moment from 'moment'
 // @ is an alias to /src
 export default {
   name: 'post',
   methods: {
     openPost: function () {
       this.$router.push({ name: 'posts', params: { postId: this.post.slug } })
+    },
+    getPostDate: function (timestamp) {
+      return moment(timestamp).format('MMMM DD, YYYY')
     },
     getFacebookUrl: function () {
       return `https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}/posts/${this.post.slug}&t=${encodeURI(this.post.title)}`

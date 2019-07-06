@@ -1,13 +1,12 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import Home from './views/Home'
 import About from './views/About'
 import Post from './views/Post'
-import VueAnalytics from 'vue-analytics'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-const router = new Router({
+export default new VueRouter({
   mode: 'history',
   linkExactActiveClass: 'active',
   base: process.env.BASE_URL,
@@ -36,13 +35,3 @@ const router = new Router({
     }
   ]
 })
-
-Vue.use(VueAnalytics, {
-  id: 'UA-143023853-1',
-  router,
-  autoTracking: {
-    screenview: true
-  }
-})
-
-export default router
