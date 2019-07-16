@@ -10,3 +10,4 @@ const firebaseConfig = {
     appId: '1:966960618264:web:ea8445cb8e584285'
 };
 firebase.initializeApp(firebaseConfig);
+firebase.performance();
