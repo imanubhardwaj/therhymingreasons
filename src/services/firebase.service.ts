@@ -1,7 +1,8 @@
 import {database} from 'firebase'
-import {Subject, Observable} from 'rxjs'
+import {Observable, Subject} from 'rxjs'
 import {Post} from "@/models/post";
 import {Comment} from "@/models/comment";
+import {About} from "@/models/about";
 
 export class FirebaseService {
   private static instance: FirebaseService;
@@ -70,5 +71,13 @@ export class FirebaseService {
             subscriber.complete()
           }, (error: any) => subscriber.error(error))
     })
+  }
+
+  getAboutPageContent(): Observable<About> {
+    return new Observable(subscriber => {
+      database().ref().child('about').on('value',
+          data => subscriber.next(data.toJSON() as About),
+          (error: any) => subscriber.error(error));
+    });
   }
 }

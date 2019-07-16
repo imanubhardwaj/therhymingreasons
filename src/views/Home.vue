@@ -96,12 +96,12 @@ export default class HomePage extends Vue {
   button:focus {
     outline: none;
   }
-
   .v-pagination__navigation .v-icon {
     font-size: 1rem !important;
   }
   .v-pagination__item--active {
-    color: #000 !important;
+    color: #ffffff!important;
+    background-color: #2c3e50;
   }
 }
 @include respond(tab) {
