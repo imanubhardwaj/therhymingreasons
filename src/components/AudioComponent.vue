@@ -1,13 +1,14 @@
 <template>
-  <div class="track">
+  <div class="track" :class="{playing: isPlaying}">
     <div class="cover">
-      <button class="play"></button>
+      <button class="play" @click="toggleAudioPlay"></button>
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
            viewBox="0 0 100 100">
-        <path id="circle" fill="none" stroke="#FFFFFF" stroke-miterlimit="10"
+        <path ref="path" id="circle" fill="none" stroke="#FFFFFF" stroke-miterlimit="10"
+              :stroke-dasharray="totalLength" :stroke-dashoffset="currentOffset"
               d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
       </svg>
-      <audio @timeupdate="onTimeUpdateListener" @load="loaded" autoplay
+      <audio ref="audio" @timeupdate="onTimeUpdateListener" @ended="audioEnded" autoplay
              src="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/f0/b8/fa/f0b8fa78-b63b-34df-c4f2-4156a3a83b38/mzaf_6470951130098414732.plus.aac.ep.m4a"></audio>
     </div>
   </div>
@@ -18,13 +19,31 @@ import {Component, Vue} from "vue-property-decorator";
 
 @Component({})
 export default class AudioComponent extends Vue {
-  $refs!: {
-    checkboxElement: HTMLFormElement;
-  };
+  $refs!: any;
+  isPlaying = true;
+  totalLength: number = 0;
+  currentOffset: number = 0;
+
+  mounted() {
+    this.totalLength = this.$refs.path.getTotalLength();
+  }
+
+  toggleAudioPlay() {
+    if (this.isPlaying) {
+      this.$refs.audio.pause();
+    } else {
+      this.$refs.audio.play();
+    }
+    this.isPlaying = !this.isPlaying;
+  }
 
   onTimeUpdateListener(event: any) {
     const el = event.srcElement;
-    console.log(el.duration, el.currentTime);
+    const currentTime = el.currentTime, maxDuration = el.duration;
+    this.currentOffset = this.totalLength - (currentTime / maxDuration * this.totalLength);
+  }
+
+  audioEnded() {
   }
 }
 </script>
