@@ -1,6 +1,10 @@
 <template>
   <div class="post">
-    <h1 class="heading" @click="openPost">{{post.title}}</h1>
+    <div class="post-header">
+      <h1 class="heading" @click="openPost">{{post.title}}</h1>
+      <v-icon v-if="!isPlaying" @click="isPlaying = true">fa-volume-up</v-icon>
+      <AudioComponent v-if="isPlaying"></AudioComponent>
+    </div>
     <img class="image" v-if="post.img" :src="post.img" alt="Post Image">
     <p v-html="post.content" class="content"></p>
     <div class="meta">
@@ -21,15 +25,18 @@
 </template>
 
 <script lang="ts">
-    import {Component, Prop, Vue} from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-property-decorator";
     import {Post} from "@/models/post";
     import {MobileDetectionMixin} from "@/mixins/mobile-detection.mixin";
     import moment from 'moment';
+import AudioComponent from "@/components/AudioComponent.vue";
 
 @Component({
-  mixins: [MobileDetectionMixin]
+    components: {AudioComponent},
+    mixins: [MobileDetectionMixin]
 })
 export default class PostComponent extends Vue {
+   isPlaying = false;
    @Prop() post!: Post;
    @Prop() showComment!: boolean;
 
@@ -74,22 +81,35 @@ export default class PostComponent extends Vue {
 
 <style lang="scss" scoped>
 @import "../sass/abstracts/mixins";
+@import "../sass/abstracts/variables";
 @import "../sass/flex-mixins/flex-styles";
 .post {
   margin: 2em 0;
 
-  .heading {
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 1.7em !important;
+  .post-header {
+    @include fx-layout-with-gap(row, 2rem);
+    @include fx-layout-alignment(flex-start, flex-end);
 
-    &::before {
-      background: #767676;
-      content: "\020";
-      display: block;
-      height: 2px;
-      margin: 1rem 0;
-      width: 1em;
+    .heading {
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1.7em !important;
+
+      &::before {
+        background: #767676;
+        content: "\020";
+        display: block;
+        height: 2px;
+        margin: 1rem 0;
+        width: 1em;
+      }
+    }
+
+    .v-icon {
+      margin-bottom: 10px;
+      font-size: 24px;
+      color: $primary-color;
+      cursor: pointer;
     }
   }
 

@@ -1,0 +1,111 @@
+<template>
+  <div class="track">
+    <div class="cover">
+      <button class="play"></button>
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+           viewBox="0 0 100 100">
+        <path id="circle" fill="none" stroke="#FFFFFF" stroke-miterlimit="10"
+              d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+      </svg>
+      <audio @timeupdate="onTimeUpdateListener" @load="loaded" autoplay
+             src="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/f0/b8/fa/f0b8fa78-b63b-34df-c4f2-4156a3a83b38/mzaf_6470951130098414732.plus.aac.ep.m4a"></audio>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import {Component, Vue} from "vue-property-decorator";
+
+@Component({})
+export default class AudioComponent extends Vue {
+  $refs!: {
+    checkboxElement: HTMLFormElement;
+  };
+
+  onTimeUpdateListener(event: any) {
+    const el = event.srcElement;
+    console.log(el.duration, el.currentTime);
+  }
+}
+</script>
+
+<style scoped>
+  audio {
+    display: none;
+  }
+
+  *:focus {
+    outline: 0;
+  }
+
+  .cover {
+    position: relative;
+    margin: 0 0 1.8em 1em;
+  }
+
+  .cover svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    stroke: #fff;
+    width: 30px;
+    height: 30px;
+    background-color: black;
+    border-radius: 100%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    width: 30px;
+    height: 30px;
+    background: transparent !important;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+  }
+
+  .play::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 100%;
+    opacity: 0;
+  }
+
+  .play::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAZdJREFUeNrs29FNQjEYBlAgDuAIuAFugBvgBrABTiBOgE4AGzgCbCAbwAayAbZJb0KMT77wt/ecpO/39qP9CqGDAQAAAAAAAAAAAAAA8A+Xy2WWxr2ZiBPILo1jGlOzESeQzmcaY7MSJ5DsO42lmYkTSOcrjYkZihNIZ630YwVyKaU/M1txAunsWir9UQPvkI/GuVtWPsoxVsjv0p9aIXHkE9iu5tIfNbrI8neWXPpzgcSRV8imttJvOZDr0j/WUvp9CKTzWsMPln0KJBuX0t9ELf2+BdKZl21sKZBYpb8upT8RSMBv+hG2MYFclX4JZioQBPKHtzQeh8Ph/pYPcSeHQQ7gJQVxsEJu61yCeIoSRp9XyLaEcY72YH0L5JTG4tY9YcsqpZ2CeIgcRl9WyL6sipNj7+1Le1FK+1TLQ7cayHsaeXva1vbgrW1Zh3J62tf6Aq0EkrenjxTEqvYXaSGQqkq75Q7JATzXVtpV8mfregJxHSFIIC7sBArElbYggbj0GSgQ16IBAAAAAAAAAAAAACCsHwEGACfr+SLf7BaJAAAAAElFTkSuQmCC');
+    background-size: 80%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+
+  #circle {
+    visibility: hidden;
+    stroke-width: 12;
+  }
+
+  .playing #circle {
+    visibility: visible;
+  }
+
+  .playing .play::after {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAK9JREFUeNrs0sEJhDAQQFEjW4ilWYp2slYS7MROYgrQZQc8DPgeiBcZQ/4MAwAAAAAAAAAAAAAAZFcyHaa1NvfX9PfhS1lu5iyB3x59ztcqXF9kbQE/5kTUTHcwWoNcBBEEQQRBEEEQRBAEEQRBEEQQBBEEQQRBEEEQBEEEQRBBEEQQBBEEQRBEEAQRBEEEQZB3+iQ7z9af/YE5a+DbwxoAAAAAAAAAAAAAAEDEKcAA4xprM8PkP94AAAAASUVORK5CYII=');
+  }
+
+  .playing .play::before {
+    opacity: 1;
+  }
+</style>

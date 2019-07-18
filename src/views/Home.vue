@@ -103,6 +103,12 @@ export default class HomePage extends Vue {
     color: #ffffff!important;
     background-color: #2c3e50;
   }
+  .v-pagination__item {
+    box-shadow: none !important;
+  }
+  .v-pagination__navigation {
+    box-shadow: none !important;
+  }
 }
 @include respond(tab) {
   .mobile-search-bar {
