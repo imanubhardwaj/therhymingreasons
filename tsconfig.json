@@ -17,7 +17,8 @@
     "paths": {
       "@/*": [
         "src/*"
-      ]
+      ],
+      "vue-analytics": ["src/vue-analytics"]
     },
     "lib": [
       "esnext",

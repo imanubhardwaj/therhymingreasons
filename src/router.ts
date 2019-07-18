@@ -3,10 +3,11 @@ import Router from 'vue-router'
 import PostPage from "@/views/Post.vue";
 import AboutPage from "@/views/About.vue";
 import HomePage from "@/views/Home.vue";
+import VueAnalytics from 'vue-analytics'
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   linkExactActiveClass: 'active',
   base: process.env.BASE_URL,
@@ -35,3 +36,10 @@ export default new Router({
     }
   ]
 })
+
+Vue.use(VueAnalytics, {
+  id: 'UA-143023853-1',
+  router
+})
+
+export default router
