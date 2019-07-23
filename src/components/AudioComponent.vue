@@ -1,55 +1,88 @@
 <template>
-  <div class="track" :class="{playing: isPlaying}">
-    <div class="cover">
-      <button class="play" @click="toggleAudioPlay"></button>
-      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-           viewBox="0 0 100 100">
-        <path ref="path" id="circle" fill="none" stroke="#FFFFFF" stroke-miterlimit="10"
-              :stroke-dasharray="totalLength" :stroke-dashoffset="currentOffset"
-              d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
-      </svg>
-      <audio ref="audio" @timeupdate="onTimeUpdateListener" @ended="audioEnded" autoplay
-             src="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/Music4/v4/f0/b8/fa/f0b8fa78-b63b-34df-c4f2-4156a3a83b38/mzaf_6470951130098414732.plus.aac.ep.m4a"></audio>
+  <div :class="{margin: (post.audioState !== AudioStateEnum.READY)}">
+    <v-icon v-if="post.audioState === AudioStateEnum.READY" @click="toggleAudioPlay">fa-volume-up</v-icon>
+    <div class="track"
+         :class="{playing: post.audioState === AudioStateEnum.PLAYING, hide: post.audioState === AudioStateEnum.READY}">
+      <div class="cover">
+        <button class="play" @click="toggleAudioPlay"></button>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             viewBox="0 0 100 100">
+          <path ref="path" id="circle" fill="none" stroke="#FFFFFF" stroke-miterlimit="10"
+                :stroke-dasharray="totalLength" :stroke-dashoffset="currentOffset"
+                d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+        </svg>
+        <audio ref="audio" @timeupdate="onTimeUpdateListener" @ended="audioEnded"
+               :src="post.audioUrl"></audio>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+	import {Component, Prop, Vue, Watch} from "vue-property-decorator";
+	import {AudioState, Post} from "@/models/post";
 
-@Component({})
-export default class AudioComponent extends Vue {
-  $refs!: any;
-  isPlaying = true;
-  totalLength: number = 0;
-  currentOffset: number = 0;
+	@Component({})
+	export default class AudioComponent extends Vue {
+		$refs!: any;
+		totalLength: number = 0;
+		currentOffset: number = 0;
+		AudioStateEnum = AudioState;
+		@Prop() post!: Post;
 
-  mounted() {
-    this.totalLength = this.$refs.path.getTotalLength();
-  }
+		@Watch('post')
+		onPropertyChanged() {
+			if (this.post.audioState !== AudioState.PLAYING) {
+				this.$refs.audio.pause();
+			}
+		}
 
-  toggleAudioPlay() {
-    if (this.isPlaying) {
-      this.$refs.audio.pause();
-    } else {
-      this.$refs.audio.play();
-    }
-    this.isPlaying = !this.isPlaying;
-  }
+		mounted() {
+			this.totalLength = this.$refs.path.getTotalLength();
+		}
 
-  onTimeUpdateListener(event: any) {
-    const el = event.srcElement;
-    const currentTime = el.currentTime, maxDuration = el.duration;
-    this.currentOffset = this.totalLength - (currentTime / maxDuration * this.totalLength);
-  }
+		toggleAudioPlay() {
+			if (this.post.audioState !== AudioState.PLAYING) {
+				this.$refs.audio.play();
+				this.$emit('audioStateChange', AudioState.PLAYING);
+			} else {
+				this.$refs.audio.pause();
+				this.$emit('audioStateChange', AudioState.PAUSED);
+			}
+		}
 
-  audioEnded() {
-  }
-}
+		onTimeUpdateListener(event: any) {
+			const el = event.srcElement;
+			const currentTime = el.currentTime, maxDuration = el.duration;
+			this.currentOffset = this.totalLength - (currentTime / maxDuration * this.totalLength);
+		}
+
+		audioEnded() {
+			this.currentOffset = 0;
+			this.$emit('audioStateChange', AudioState.ENDED);
+		}
+	}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  @import "../sass/abstracts/variables";
+
   audio {
+    display: none;
+  }
+
+  .margin {
+    margin: 0 0 1.8em 1em;
+  }
+
+  .v-icon {
+    margin-bottom: 5px;
+    font-size: 24px;
+    color: $primary-color !important;
+    cursor: pointer !important;
+  }
+
+  .hide {
     display: none;
   }
 
@@ -59,7 +92,6 @@ export default class AudioComponent extends Vue {
 
   .cover {
     position: relative;
-    margin: 0 0 1.8em 1em;
   }
 
   .cover svg {
