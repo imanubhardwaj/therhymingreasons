@@ -1,4 +1,4 @@
 export interface About {
-    author: string;
-    blog: string;
+	author: string;
+	blog: string;
 }

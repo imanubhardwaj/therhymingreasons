@@ -29,23 +29,23 @@
 </template>
 
 <script lang="ts">
-    import {Component, Vue} from "vue-property-decorator";
-    import Home from "@/views/Home.vue";
-    import SearchComponent from "@/components/Search.vue";
+	import {Component, Vue} from "vue-property-decorator";
+	import Home from "@/views/Home.vue";
+	import SearchComponent from "@/components/Search.vue";
 
-    @Component({
-  components: {
-    Home,
-    SearchComponent
-  }
-})
-export default class Container extends Vue {
-  isPagesListOpen = false;
+	@Component({
+		components: {
+			Home,
+			SearchComponent
+		}
+	})
+	export default class Container extends Vue {
+		isPagesListOpen = false;
 
-  showSearch() {
-    return this.$route.path === '/'
-  }
-}
+		showSearch() {
+			return this.$route.path === '/'
+		}
+	}
 </script>
 
 <style lang="scss" scoped>

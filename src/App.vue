@@ -5,15 +5,16 @@
 </template>
 
 <script lang="ts">
-    import {Component, Provide, Vue} from "vue-property-decorator";
-import Container from "@/views/Container.vue";
-    import {FirebaseService} from "@/services/firebase.service";
-@Component({
-    components: {Container}
-})
-export default class App extends Vue {
-    @Provide('firebase_service') private firebaseService: FirebaseService = FirebaseService.getInstance();
-}
+	import {Component, Provide, Vue} from "vue-property-decorator";
+	import Container from "@/views/Container.vue";
+	import {FirebaseService} from "@/services/firebase.service";
+
+	@Component({
+		components: {Container}
+	})
+	export default class App extends Vue {
+		@Provide('firebase_service') private firebaseService: FirebaseService = FirebaseService.getInstance();
+	}
 </script>
 
 <style lang="scss">

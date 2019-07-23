@@ -12,65 +12,66 @@
 </template>
 
 <script lang="ts">
-import {Component, Inject, Vue} from "vue-property-decorator";
-import {About} from "@/models/about";
-import {FirebaseService} from "@/services/firebase.service";
-import SpinnerComponent from "@/components/Spinner.vue";
+	import {Component, Inject, Vue} from "vue-property-decorator";
+	import {About} from "@/models/about";
+	import {FirebaseService} from "@/services/firebase.service";
+	import SpinnerComponent from "@/components/Spinner.vue";
 
-@Component({
-  components: {
-    SpinnerComponent
-  }
-})
-export default class AboutPage extends Vue {
-    about: About = {author: '', blog: ''};
-    @Inject('firebase_service') private firebaseService!: FirebaseService;
+	@Component({
+		components: {
+			SpinnerComponent
+		}
+	})
+	export default class AboutPage extends Vue {
+		about: About = {author: '', blog: ''};
+		@Inject('firebase_service') private firebaseService!: FirebaseService;
 
-    created() {
-        this.firebaseService.getAboutPageContent().subscribe(about => this.about = about);
-    }
-}
+		created() {
+			this.firebaseService.getAboutPageContent().subscribe(about => this.about = about);
+		}
+	}
 </script>
 <style lang="scss" scoped>
-@import "../sass/flex-mixins/flex-styles.scss";
-@import "../sass/abstracts/mixins.scss";
-.about {
-  @include fx-layout-with-gap(column, 20px);
+  @import "../sass/flex-mixins/flex-styles.scss";
+  @import "../sass/abstracts/mixins.scss";
 
-  h2 {
-    font-weight: 400;
-    margin: 0 0.5em 0.5em 0;
-  }
+  .about {
+    @include fx-layout-with-gap(column, 20px);
 
-  .spinner {
-    text-align: center;
-    @include absCenter();
-  }
+    h2 {
+      font-weight: 400;
+      margin: 0 0.5em 0.5em 0;
+    }
 
-  .tagline {
-    margin-top: 0;
-  }
+    .spinner {
+      text-align: center;
+      @include absCenter();
+    }
 
-  .about-heading {
-    margin-top: 1em;
+    .tagline {
+      margin-top: 0;
+    }
 
-    &::before {
-      background: #767676;
-      content: "\020";
-      display: block;
-      height: 2px;
-      margin: 1rem 0;
-      width: 1em;
+    .about-heading {
+      margin-top: 1em;
+
+      &::before {
+        background: #767676;
+        content: "\020";
+        display: block;
+        height: 2px;
+        margin: 1rem 0;
+        width: 1em;
+      }
+    }
+
+    .contact-heading {
+      margin: 1em 0;
+    }
+
+    .router-link {
+      width: fit-content;
+      margin-top: 2em;
     }
   }
-
-  .contact-heading {
-    margin: 1em 0;
-  }
-
-  .router-link {
-    width: fit-content;
-    margin-top: 2em;
-  }
-}
 </style>
