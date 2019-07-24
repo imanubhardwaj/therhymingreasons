@@ -33,6 +33,10 @@ const router = new Router({
       path: '/about',
       name: 'about',
       component: AboutPage
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
   ]
 })

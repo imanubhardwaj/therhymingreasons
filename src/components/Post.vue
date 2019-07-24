@@ -1,32 +1,32 @@
 <template>
-  <div class="post">
+  <div class="post" itemscope itemtype="http://schema.org/ShortStory">
     <div class="post-header">
-      <h1 class="heading" @click="openPost">{{post.title}}</h1>
+      <h1 class="heading" @click="openPost" itemprop="name">{{post.title}}</h1>
       <AudioComponent v-if="post.audioUrl" @audioStateChange="$emit('audioStateChange', $event)" :post="post"></AudioComponent>
     </div>
-    <img class="image" v-if="post.img" :src="post.img" alt="Post Image">
-    <p v-html="post.content" class="content"></p>
+    <img class="image" v-if="post.img" :src="post.img" alt="Post Image" itemprop="image">
+    <p v-html="post.content" class="content" itemprop="poem"></p>
     <div class="meta">
-      <span class="link" @click="navigateToAbout"><v-icon>fa-user</v-icon>{{post.author}}</span>
-      <span><v-icon>fa-clock</v-icon>{{getDate(post.date)}}</span>
+      <span class="link" @click="navigateToAbout" itemprop="author"><v-icon>fa-user</v-icon>{{post.author}}</span>
+      <time itemprop="time" :datetime="getDate(post.date)"><v-icon>fa-clock</v-icon>{{getDate(post.date)}}</time>
       <br>
-      <span><v-icon>fa-tags</v-icon>{{post.tags}}</span>
+      <span itemprop="tags"><v-icon>fa-tags</v-icon>{{post.tags}}</span>
       <span class="link" v-if="showComment" @click="navigateToComment"><v-icon>fa-comment</v-icon>Comment</span>
     </div>
     <div class="share">
       <p>
         <v-icon>fa-share</v-icon>&nbsp;Share
       </p>
-      <a :href="getFacebookUrl()" target="_blank">
+      <a :href="getFacebookUrl()" target="_blank" itemprop="url">
         <v-icon style="color: #3b5998">fab fa-facebook</v-icon>
       </a>
-      <a :href="getTwitterUrl()" target="_blank">
+      <a :href="getTwitterUrl()" target="_blank" itemprop="url">
         <v-icon style="color: #1DA1F2">fab fa-twitter</v-icon>
       </a>
-      <a :href="getWhatsappUrl()" data-action="share/whatsapp/share" target="_blank">
+      <a :href="getWhatsappUrl()" data-action="share/whatsapp/share" target="_blank" itemprop="url">
         <v-icon style="color: #25D366">fab fa-whatsapp</v-icon>
       </a>
-      <a :href="getMailUrl()" target="_blank">
+      <a :href="getMailUrl()" target="_blank" itemprop="url">
         <v-icon style="color: #333333">fa-envelope</v-icon>
       </a>
     </div>
