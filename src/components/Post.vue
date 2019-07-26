@@ -2,16 +2,20 @@
   <div class="post" itemscope itemtype="http://schema.org/ShortStory">
     <div class="post-header">
       <h1 class="heading" @click="openPost" itemprop="name">{{post.title}}</h1>
-      <AudioComponent v-if="post.audioUrl" @audioStateChange="$emit('audioStateChange', $event)" :post="post"></AudioComponent>
+      <AudioComponent v-if="post.audioUrl" @audioStateChange="$emit('audioStateChange', $event)"
+                      :post="post"></AudioComponent>
     </div>
     <img class="image" v-if="post.img" :src="post.img" alt="Post Image" itemprop="image">
     <p v-html="post.content" class="content" itemprop="poem"></p>
     <span class="views-count" v-if="post.views > 0"><v-icon>fa-eye</v-icon>
-      {{post.views}} {{post.views > 1 ? 'Views' : 'View'}}
+      {{post.views | viewCount(1)}} {{post.views > 1 ? 'Views' : 'View'}}
     </span>
     <div class="meta">
       <span class="link" @click="navigateToAbout" itemprop="author"><v-icon>fa-user</v-icon>{{post.author}}</span>
-      <time itemprop="time" :datetime="getDate(post.date)"><v-icon>fa-clock</v-icon>{{getDate(post.date)}}</time>
+      <time itemprop="time" :datetime="getDate(post.date)">
+        <v-icon>fa-clock</v-icon>
+        {{getDate(post.date)}}
+      </time>
       <br>
       <span itemprop="tags"><v-icon>fa-tags</v-icon>{{post.tags}}</span>
       <span class="link" v-if="showComment" @click="navigateToComment"><v-icon>fa-comment</v-icon>Comment</span>
@@ -37,57 +41,77 @@
 </template>
 
 <script lang="ts">
-	import {Component, Prop, Vue} from "vue-property-decorator";
-	import {Post} from "@/models/post";
-	import {MobileDetectionMixin} from "@/mixins/mobile-detection.mixin";
-	import moment from 'moment';
-	import AudioComponent from "@/components/AudioComponent.vue";
+  import {Component, Prop, Vue} from "vue-property-decorator";
+  import {Post} from "@/models/post";
+  import {MobileDetectionMixin} from "@/mixins/mobile-detection.mixin";
+  import moment from 'moment';
+  import AudioComponent from "@/components/AudioComponent.vue";
 
-	@Component({
-		components: {AudioComponent},
-		mixins: [MobileDetectionMixin]
-	})
-	export default class PostComponent extends Vue {
-		@Prop() post!: Post;
-		@Prop() showComment!: boolean;
+  @Component({
+    components: {AudioComponent},
+    mixins: [MobileDetectionMixin],
+    filters: {
+      viewCount: function (value: any, decimals: number) {
+        let exp;
+        const suffixes = ['K', 'M', 'G', 'T', 'P', 'E'];
 
-		openPost() {
-			this.$router.push({name: 'posts', params: {postId: this.post.slug}})
-		}
+        value = parseInt(value, 10);
 
-		getDate(timestamp: number) {
-			return moment(timestamp).format('MMMM DD, YYYY');
-		}
+        if (isNaN(value)) {
+          return null;
+        }
 
-		getFacebookUrl() {
-			return `https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}/posts/${this.post.slug}&t=${encodeURI(this.post.title)}`
-		}
+        if (value < 1000) {
+          return value;
+        }
 
-		getTwitterUrl() {
-			return `https://twitter.com/intent/tweet?url=${window.location.origin}/posts/${this.post.slug}&text=${encodeURI(this.post.title)}`
-		}
+        exp = Math.floor(Math.log(value) / Math.log(1000));
 
-		getWhatsappUrl() {
-			const text = `%2AThe%20Rhyming%20Reasons%2A%0A%0A${encodeURI(this.post.title)}%0A%0A${window.location.origin}/posts/${this.post.slug}`;
-			// @ts-ignore
-			if (this.isDesktop()) {
-				return `https://wa.me?text=${text}`;
-			}
-			return `whatsapp://send?text=${text}`
-		}
+        return (value / Math.pow(1000, exp)).toFixed(decimals) + suffixes[exp - 1];
+      }
+    }
+  })
+  export default class PostComponent extends Vue {
+    @Prop() post!: Post;
+    @Prop() showComment!: boolean;
 
-		getMailUrl() {
-			return `mailto:?subject=${encodeURI(this.post.title + ' by The Rhyming Reasons')}&body=${encodeURI('Read ' + this.post.title + ' at ' + window.location.origin + '/posts/' + this.post.slug)}`
-		}
+    openPost() {
+      this.$router.push({name: 'posts', params: {postId: this.post.slug}})
+    }
 
-		navigateToComment() {
-			this.$router.push({name: 'posts', params: {postId: this.post.slug}, hash: 'comment-box'})
-		}
+    getDate(timestamp: number) {
+      return moment(timestamp).format('MMMM DD, YYYY');
+    }
 
-		navigateToAbout() {
-			this.$router.push({name: 'about'})
-		}
-	}
+    getFacebookUrl() {
+      return `https://www.facebook.com/sharer/sharer.php?u=${window.location.origin}/posts/${this.post.slug}&t=${encodeURI(this.post.title)}`
+    }
+
+    getTwitterUrl() {
+      return `https://twitter.com/intent/tweet?url=${window.location.origin}/posts/${this.post.slug}&text=${encodeURI(this.post.title)}`
+    }
+
+    getWhatsappUrl() {
+      const text = `%2AThe%20Rhyming%20Reasons%2A%0A%0A${encodeURI(this.post.title)}%0A%0A${window.location.origin}/posts/${this.post.slug}`;
+      // @ts-ignore
+      if (this.isDesktop()) {
+        return `https://wa.me?text=${text}`;
+      }
+      return `whatsapp://send?text=${text}`
+    }
+
+    getMailUrl() {
+      return `mailto:?subject=${encodeURI(this.post.title + ' by The Rhyming Reasons')}&body=${encodeURI('Read ' + this.post.title + ' at ' + window.location.origin + '/posts/' + this.post.slug)}`
+    }
+
+    navigateToComment() {
+      this.$router.push({name: 'posts', params: {postId: this.post.slug}, hash: 'comment-box'})
+    }
+
+    navigateToAbout() {
+      this.$router.push({name: 'about'})
+    }
+  }
 </script>
 
 <style lang="scss" scoped>

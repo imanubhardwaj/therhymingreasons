@@ -45,6 +45,7 @@ import {AudioState} from "../models/post";
     currentPage: number = 1;
     totalPages: number = 0;
     pageSize: number = 5;
+    viewCountUpdated = false;
     @Inject('firebase_service') private firebaseService!: FirebaseService;
 
     created() {
@@ -58,6 +59,9 @@ import {AudioState} from "../models/post";
         });
         this.totalPages = Math.ceil(posts.length / this.pageSize);
         this.updatePagePosts();
+        if (!this.viewCountUpdated) {
+          this.updatePostViewCount();
+        }
       });
       this.firebaseService.searchQuery.asObservable().pipe(debounceTime(400)).subscribe(query => {
         if (!query) {
@@ -67,6 +71,14 @@ import {AudioState} from "../models/post";
         this.filteredPosts = this.posts.filter(post => {
           return post.title.toLowerCase().includes(query.toLowerCase())
         })
+      });
+    }
+
+    updatePostViewCount() {
+      this.posts.forEach(post => {
+        const views = post.views || 0;
+        this.viewCountUpdated = true
+        this.firebaseService.updatePostViewCount(post.slug, views + 1).subscribe();
       });
     }
 
