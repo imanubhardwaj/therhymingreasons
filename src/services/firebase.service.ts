@@ -5,15 +5,7 @@ import {Comment} from "@/models/comment";
 import {About} from "@/models/about";
 
 export class FirebaseService {
-	private static instance: FirebaseService;
 	public searchQuery = new Subject<string>();
-
-	private constructor() {
-	}
-
-	public static getInstance(): FirebaseService {
-		return this.instance || (this.instance = new this());
-	}
 
 	getPosts(): Observable<Post[]> {
 		return new Observable(subscriber => {
@@ -80,5 +72,21 @@ export class FirebaseService {
 			data => subscriber.next(data.toJSON() as About),
 			(error: any) => subscriber.error(error));
 		});
+	}
+
+	updatePostViewCount(slug: string, count: number): Observable<void> {
+		return new Observable(subscriber => {
+			const dbRef = database().ref().child('posts');
+			dbRef.orderByChild('slug').equalTo(slug)
+				.once('value', data => {
+					if (data && data.toJSON()) {
+						const json: any = data.toJSON();
+						const key = Object.keys(json)[0];
+						dbRef.child(key).child('views').set(count)
+					}
+					subscriber.next();
+					subscriber.complete()
+				}, (error: any) => subscriber.error(error))
+		})
 	}
 }

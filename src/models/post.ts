@@ -9,6 +9,7 @@ export interface Post {
 	tags: string;
 	author: string;
 	comments: Comment[];
+	views?: number;
 	audioUrl?: string;
 	audioState: AudioState;
 }

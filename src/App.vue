@@ -13,7 +13,7 @@
 		components: {Container}
 	})
 	export default class App extends Vue {
-		@Provide('firebase_service') private firebaseService: FirebaseService = FirebaseService.getInstance();
+		@Provide('firebase_service') private firebaseService: FirebaseService = new FirebaseService();
 	}
 </script>
 

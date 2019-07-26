@@ -23,52 +23,61 @@
 </template>
 
 <script lang="ts">
-	import moment from 'moment'
-	import {Component, Inject, Vue} from "vue-property-decorator";
-	import CommentComponent from "@/components/Comment.vue";
-	import SpinnerComponent from "@/components/Spinner.vue";
-	import {FirebaseService} from "@/services/firebase.service";
-	import {Comment} from "@/models/comment";
-	import {Post} from "@/models/post";
-	import PostComponent from "@/components/Post.vue";
+  import moment from 'moment'
+  import {Component, Inject, Vue} from "vue-property-decorator";
+  import CommentComponent from "@/components/Comment.vue";
+  import SpinnerComponent from "@/components/Spinner.vue";
+  import {FirebaseService} from "@/services/firebase.service";
+  import {Comment} from "@/models/comment";
+  import {Post} from "@/models/post";
+  import PostComponent from "@/components/Post.vue";
 
-	@Component({
-		components: {
-			SpinnerComponent,
-			CommentComponent,
-			PostComponent
-		}
-	})
-	export default class PostPage extends Vue {
-		post: any;
-		loading: boolean = true;
-		name: string = '';
-		comment: string = '';
-		comments: Comment[] = [];
-		@Inject('firebase_service') private firebaseService!: FirebaseService;
+  @Component({
+    components: {
+      SpinnerComponent,
+      CommentComponent,
+      PostComponent
+    }
+  })
+  export default class PostPage extends Vue {
+    post: any;
+    loading: boolean = true;
+    name: string = '';
+    comment: string = '';
+    comments: Comment[] = [];
+    @Inject('firebase_service') private firebaseService!: FirebaseService;
 
-		created() {
-			this.firebaseService.getPost(this.$route.params.postId).subscribe((post: Post) => {
-				this.post = post;
-				this.comments = post.comments.sort((comment1: Comment, comment2: Comment) => comment2.date - comment1.date).slice(0, 10);
-				this.loading = false;
-			})
-		}
+    created() {
+      this.firebaseService.getPost(this.$route.params.postId).subscribe((post: Post) => {
+        this.post = post;
+        this.comments = post.comments.sort((comment1: Comment, comment2: Comment) => comment2.date - comment1.date).slice(0, 10);
+        this.loading = false;
+      })
+    }
 
-		postComment() {
-			const comment = {
-				name: this.name,
-				comment: this.comment.replace(/\n/g, '<br>'),
-				date: moment().unix(),
-				isVerified: false
-			};
-			this.firebaseService.postComment(this.$route.params.postId, comment)
-			.subscribe(res => {
-				this.name = '';
-				this.comment = '';
-			})
-		}
-	}
+    mounted() {
+      this.updatePostViewCount();
+    }
+
+    updatePostViewCount() {
+      const views = this.post.views || 0;
+      this.firebaseService.updatePostViewCount(this.post.slug, views + 1).subscribe();
+    }
+
+    postComment() {
+      const comment = {
+        name: this.name,
+        comment: this.comment.replace(/\n/g, '<br>'),
+        date: moment().unix(),
+        isVerified: false
+      };
+      this.firebaseService.postComment(this.$route.params.postId, comment)
+        .subscribe(res => {
+          this.name = '';
+          this.comment = '';
+        })
+    }
+  }
 </script>
 
 <style lang="scss" scoped>

@@ -6,6 +6,9 @@
     </div>
     <img class="image" v-if="post.img" :src="post.img" alt="Post Image" itemprop="image">
     <p v-html="post.content" class="content" itemprop="poem"></p>
+    <span class="views-count" v-if="post.views > 0"><v-icon>fa-eye</v-icon>
+      {{post.views}} {{post.views > 1 ? 'Views' : 'View'}}
+    </span>
     <div class="meta">
       <span class="link" @click="navigateToAbout" itemprop="author"><v-icon>fa-user</v-icon>{{post.author}}</span>
       <time itemprop="time" :datetime="getDate(post.date)"><v-icon>fa-clock</v-icon>{{getDate(post.date)}}</time>
@@ -129,6 +132,7 @@
     }
 
     div.meta {
+      margin-top: 1.5em;
       @include fx-layout(row);
       flex-wrap: wrap;
 
