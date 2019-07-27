@@ -3,9 +3,11 @@ import {AudioState} from "../models/post";
 <template>
   <div class="home">
     <SearchComponent :animate="false" class="mobile-search-bar" v-if="!loading"></SearchComponent>
-    <PostComponent v-for="post in filteredPosts" :key="post.title" :post="post" :showComment="true"
+    <div v-for="post in filteredPosts" :key="post.title" @mouseover="updatePostViewCount(post)">
+      <PostComponent :post="post" :showComment="true"
                    @audioStateChange="audioToggle(post, $event)">
-    </PostComponent>
+      </PostComponent>
+    </div>
     <p class="no-posts" v-if="!filteredPosts.length && !loading">No Posts Found !</p>
     <div class="text-xs-center" v-if="!loading && totalPages > 1">
       <v-pagination
@@ -45,7 +47,7 @@ import {AudioState} from "../models/post";
     currentPage: number = 1;
     totalPages: number = 0;
     pageSize: number = 5;
-    viewCountUpdated = false;
+    viewedPosts: string[] = [];
     @Inject('firebase_service') private firebaseService!: FirebaseService;
 
     created() {
@@ -59,9 +61,6 @@ import {AudioState} from "../models/post";
         });
         this.totalPages = Math.ceil(posts.length / this.pageSize);
         this.updatePagePosts();
-        if (!this.viewCountUpdated) {
-          this.updatePostViewCount();
-        }
       });
       this.firebaseService.searchQuery.asObservable().pipe(debounceTime(400)).subscribe(query => {
         if (!query) {
@@ -74,12 +73,11 @@ import {AudioState} from "../models/post";
       });
     }
 
-    updatePostViewCount() {
-      this.posts.forEach(post => {
+    updatePostViewCount(post: Post) {
+      if (!this.viewedPosts.includes(post.slug)) {
         const views = post.views || 0;
-        this.viewCountUpdated = true
-        this.firebaseService.updatePostViewCount(post.slug, views + 1).subscribe();
-      });
+        this.firebaseService.updatePostViewCount(post.slug, views + 1).subscribe(() => this.viewedPosts.push(post.slug));
+      }
     }
 
     updatePagePosts() {
