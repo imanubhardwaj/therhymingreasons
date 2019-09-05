@@ -86,6 +86,7 @@ import {AudioState} from "../models/post";
 
     paginate(page: number) {
       this.filteredPosts = this.posts.slice((page - 1) * this.pageSize, page * this.pageSize)
+      window.scrollTo(0, 0)
     }
 
     audioToggle(post: Post, audioState: AudioState) {
