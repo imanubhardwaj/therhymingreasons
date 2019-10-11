@@ -1,0 +1,95 @@
+/* These mixins are replacement of Flex Layout*/
+
+// For DOM containers
+// Replacement of fxLayout
+// eg, fxLayout="row" -> @include fx-layout(row)
+@mixin fx-layout($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+// For DOM containers
+// Replacement of fxLayout with fxLayoutGap
+// eg, fxLayout="row" fxLayoutGap="10px" -> @include fx-layout-with-gap(row, 10px)
+@mixin fx-layout-with-gap($direction, $value) {
+  @include fx-layout($direction);
+  @if ($direction == row) {
+    > * {
+      margin-right: $value;
+    }
+    > *:last-child {
+      margin-right: 0;
+    }
+  } @else if ($direction == column) {
+    > * {
+      margin-bottom: $value;
+    }
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  } @else if ($direction == reverse-row) {
+    > * {
+      margin-left: $value;
+    }
+    > *:last-child {
+      margin-left: 0;
+    }
+  } @else if ($direction == reverse-column) {
+    > * {
+      margin-top: $value;
+    }
+    > *:last-child {
+      margin-top: 0;
+    }
+  }
+}
+
+// For DOM elements
+// Replacement of fxFlex="basis"
+// eg, fxFlex="400px" -> @include fx-flex(400px)
+@mixin fx-flex($basis) {
+  flex-basis: $basis;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+// For DOM elements
+// Replacement of fxFlex="grow shrink basis"
+// eg, fxFlex="1 1 auto" -> @include fx-flex--gsb(1, 1, auto)
+@mixin fx-flex--gsb($grow, $shrink, $basis) {
+  flex-basis: $basis;
+  flex-grow: $grow;
+  flex-shrink: $shrink;
+}
+
+// For DOM containers
+// Replacement of fxLayoutAlign
+// eg, fxLayoutAlignment="start center" -> @include fx-layout-alignment(start, center)
+@mixin fx-layout-alignment(
+  $main-axis-alignment,
+  $cross-axis-alignment
+) {
+  justify-content: $main-axis-alignment;
+  align-items: $cross-axis-alignment;
+  align-content: $cross-axis-alignment;
+}
+
+// For DOM elements
+// Replacement of fxFlexAlign
+// eg, fxFlexAlign="start" -> @include fx-flex-align(start)
+@mixin fx-flex-align($direction) {
+  align-self: $direction;
+}
+
+// For DOM elements
+// Replacement of fxFlexOffset
+// eg, fxFlexOffset="10%" -> @include fx-flex-offset(10%)
+@mixin fx-flex-offset($value) {
+  margin-left: $value;
+}
+
+// For DOM elements
+// TO assign weights to child elements and divide space in terms of numbers.
+@mixin fx-weight($value) {
+  @include fx-flex--gsb($value, $value, 0);
+}

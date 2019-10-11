@@ -1,0 +1,29 @@
+{
+  "name": "therhymingreasons",
+  "description": "Rhymes for a Reason",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@nuxt/typescript-runtime": "latest",
+    "firebase": "latest",
+    "moment": "latest",
+    "nuxt": "latest",
+    "nuxt-property-decorator": "latest",
+    "rxjs": "latest",
+    "vuex-class": "latest"
+  },
+  "scripts": {
+    "dev": "nuxt-ts",
+    "build": "nuxt-ts build",
+    "start": "nuxt-ts start",
+    "generate": "nuxt-ts generate",
+    "heroku-postbuild": "npm run build"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "latest",
+    "@nuxt/typescript-build": "latest",
+    "@nuxtjs/vuetify": "latest",
+    "node-sass": "latest",
+    "sass-loader": "latest"
+  }
+}
