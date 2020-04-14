@@ -1,0 +1,45 @@
+.header {
+    padding-bottom: 2em;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.header .title {
+    margin: 0;
+}
+
+.header .title a {
+    font-weight: 400;
+    font-size: 1.75rem;
+    color: #2c3e50;
+}
+
+.header .title:after {
+    background: #767676;
+    content: " ";
+    display: block;
+    height: 2px;
+    width: 2em;
+    margin-top: 10px;
+}
+
+.header .subtitle {
+    font-size: 16px;
+}
+
+.header .links > * {
+    margin-left: 2em;
+    text-decoration: none;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .header .link {
+        display: none;
+    }
+}

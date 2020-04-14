@@ -1,0 +1,29 @@
+.comment {
+    margin-top: 1.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.comment > * {
+    margin-bottom: 5px;
+}
+
+.comment .heading:before {
+    background: #767676;
+    content: "\020";
+    display: block;
+    height: 2px;
+    margin: 1rem 0;
+    width: 1.5em;
+}
+
+.comment p {
+    font-size: 1em;
+    margin-top: 0;
+}
+
+.comment span {
+    font-size: 12px;
+    font-style: italic;
+    color: gray;
+}

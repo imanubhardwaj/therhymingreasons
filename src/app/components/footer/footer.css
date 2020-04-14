@@ -1,0 +1,35 @@
+.footer {
+    padding: 5em 0 2em 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.footer span.label::before {
+    background: #767676;
+    content: "\020";
+    display: block;
+    height: 2px;
+    width: 2em;
+    margin-bottom: 10px;
+}
+
+.footer .social-links > * {
+    margin-right: 20px;
+}
+
+.social-links > :last-child {
+    margin-right: 0;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .footer .social-links > * {
+        margin-right: 15px;
+    }
+
+    .social-links > :last-child {
+        margin-right: 0;
+    }
+}

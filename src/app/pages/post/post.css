@@ -1,0 +1,58 @@
+.post-container {
+    flex: 1;
+}
+
+#comment-box {
+    max-width: 60%;
+}
+
+#comment-box > * {
+    margin-bottom: 1em;
+}
+
+#comment-box > .heading, .comments-list > .heading {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-top: 3em;
+}
+
+input, textarea {
+    background-color: transparent;
+    border-style: none;
+    color: inherit;
+    font-size: 12px;
+    width: 100%;
+    outline: none;
+}
+
+.input-container {
+    padding: 5px 10px 5px 10px;
+    border: 1px solid rgb(44, 62, 80);
+    border-radius: 2px;
+}
+
+.input-container textarea {
+    resize: none;
+    min-height: 100px;
+}
+
+.post-btn {
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    border: 1px solid rgb(44, 62, 80);
+    outline: none;
+    cursor: pointer;
+}
+
+.post-btn:disabled {
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    #comment-box {
+        max-width: 100%;
+    }
+}

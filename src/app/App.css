@@ -1,0 +1,45 @@
+.app {
+    margin: 0;
+    padding: 1em;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.bg-image {
+    z-index: -1;
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    opacity: 0.1;
+    right: 0;
+    height: 100%;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .app {
+        margin: 0 calc(10% + 60px);
+        padding: 2.5rem 0;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}
