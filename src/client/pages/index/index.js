@@ -27,23 +27,23 @@ export default class HomePage extends React.Component {
                     {/*Google / Search Engine Tags*/}
                     <meta itemprop="name" content="The Rhyming Reasons | A Poetry Blog"/>
                     <meta itemprop="description" content="Emotions and Words."/>
-                    <meta itemprop="image" content="http://blog.manubhardwaj.in/images/logo.png"/>
+                    <meta itemprop="image" content="https://blog.manubhardwaj.in/images/logo.png"/>
 
                     {/*Facebook Meta Tags*/}
                     <meta property="og:url" content="https://blog.manubhardwaj.in"/>
                     <meta property="og:type" content="website"/>
                     <meta property="og:title" content="The Rhyming Reasons | A Poetry Blog"/>
                     <meta property="og:description" content="Emotions and Words."/>
-                    <meta property="og:image" content="http://blog.manubhardwaj.in/images/logo.png"/>
+                    <meta property="og:image" content="https://blog.manubhardwaj.in/images/logo.png"/>
 
                     {/*Twitter Meta Tags*/}
                     <meta name="twitter:card" content="summary_large_image"/>
                     <meta name="twitter:title" content="The Rhyming Reasons | A Poetry Blog"/>
                     <meta name="twitter:description" content="Emotions and Words."/>
-                    <meta name="twitter:image" content="http://blog.manubhardwaj.in/images/logo.png"/>
+                    <meta name="twitter:image" content="https://blog.manubhardwaj.in/images/logo.png"/>
 
                     {/*Canonical Tag*/}
-                    <link rel="canonical" href="http://blog.manubhardwaj.in"/>
+                    <link rel="canonical" href="https://blog.manubhardwaj.in"/>
                 </Head>
                 <div className="posts-list">
                     {!this.state.hideSpinner && <Spinner/>}
