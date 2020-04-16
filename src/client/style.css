@@ -49,10 +49,9 @@ a, .link {
     z-index: -1;
     position: fixed;
     bottom: 0;
-    top: 0;
-    opacity: 0.1;
     right: 0;
-    height: 100%;
+    opacity: 0.1;
+    height: calc(var(--vh, 1vh) * 100);
 }
 
 .clickable {

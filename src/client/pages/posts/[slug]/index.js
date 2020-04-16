@@ -34,6 +34,7 @@ class PostPage extends React.Component {
             this.router.replace('/404');
             return;
         }
+        HelperUtils.setViewableContentSizeCssProperty();
         Firebase.updatePostViewCount(this.slug, (this.post.views || 0) + 1);
         this.addInputHandlers();
     }

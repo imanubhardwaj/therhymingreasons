@@ -1,8 +1,9 @@
 import React from 'react';
+import Head from "next/head";
 import Spinner from "../../components/spinner/spinner";
 import Firebase from "../../services/firebase";
+import HelperUtils from "../../utils/helper";
 import './about.css';
-import Head from "next/head";
 
 export default class AboutPage extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ export default class AboutPage extends React.Component {
     }
 
     componentDidMount() {
+        HelperUtils.setViewableContentSizeCssProperty();
         this.subscription = Firebase.getAboutPageContent();
         this.subscription.then(about => this.setState({about, hideSpinner: true}))
     }

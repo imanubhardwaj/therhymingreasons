@@ -27,4 +27,9 @@ export default class HelperUtils {
     };
 
     static getMetaDescription = string => string.replace(/<br>/g, '').substring(0, 160);
+
+    static setViewableContentSizeCssProperty() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
 }
