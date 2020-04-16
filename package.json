@@ -1,0 +1,40 @@
+{
+  "name": "therhymingreasons",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/server/index.js",
+  "scripts": {
+    "setup": "firebase use --add",
+    "build:client": "next build src/client",
+    "build:server": "babel src/server --out-dir dist/server --source-maps",
+    "build": "npm run build:client && npm run build:server",
+    "watch:client": "next src/client",
+    "watch:server": "babel src/server --out-dir dist/server --source-maps --watch",
+    "watch": "npm run watch:client & npm run watch:server",
+    "serve": "cross-env NODE_ENV=production firebase serve --only functions,hosting",
+    "predeploy": "rimraf dist/ && npm run build",
+    "deploy": "cross-env NODE_ENV=production firebase deploy --only functions,hosting"
+  },
+  "engines": {
+    "node": "10"
+  },
+  "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "firebase": "^7.14.0",
+    "firebase-admin": "^8.3.0",
+    "firebase-functions": "^3.2.0",
+    "moment": "^2.24.0",
+    "next": "^9.3.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "cross-env": "^5.2.0",
+    "firebase-functions-test": "^0.1.6",
+    "firebase-tools": "^7.2.1",
+    "rimraf": "^2.6.3"
+  }
+}

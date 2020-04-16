@@ -1,0 +1,15 @@
+.icon-link {
+    justify-content: flex-start;
+    align-items: center;
+    height: 18px;
+}
+
+.icon-link .icon {
+    color: rgba(0,0,0,.54);
+    width: 18px;
+    height: 18px;
+}
+
+.icon-link span {
+    margin-left: 5px;
+}

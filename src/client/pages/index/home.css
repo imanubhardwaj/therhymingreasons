@@ -1,0 +1,13 @@
+.home-container {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+}
+
+.posts-list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+

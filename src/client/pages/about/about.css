@@ -1,0 +1,29 @@
+.about-container {
+    flex: 1;
+}
+
+.about-container h2 {
+    font-weight: 400;
+    margin: 0 0.5em 0.5em 0;
+}
+
+.about-heading {
+    margin-top: 1em;
+}
+
+.about-heading:before {
+    background: #767676;
+    content: "\020";
+    display: block;
+    height: 2px;
+    margin: 1rem 0;
+    width: 1em;
+}
+
+.contact-heading {
+    margin: 1em 0;
+}
+
+.mail-link {
+    text-decoration: underline;
+}

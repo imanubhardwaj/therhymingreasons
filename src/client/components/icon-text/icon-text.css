@@ -1,0 +1,15 @@
+.icon-text {
+    justify-content: flex-start;
+    align-items: center;
+    height: 16px;
+}
+
+.icon-text .icon {
+    color: rgba(0,0,0,.54);
+    width: 16px;
+    height: 16px;
+}
+
+.icon-text span {
+    margin-left: 5px;
+}

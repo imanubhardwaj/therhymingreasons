@@ -1,0 +1,55 @@
+.post {
+    margin: 1.5em 0 5em 0;
+}
+
+.post > * {
+    margin-top: 1rem;
+}
+
+.post .title {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.5em;
+}
+
+.post .title:before {
+    background: #767676;
+    content: " ";
+    display: block;
+    height: 2px;
+    width: 1em;
+    margin-bottom: 1rem;
+}
+
+.post .container {
+    width: max-content;
+    margin-bottom: 1.5em;
+}
+
+.container .content {
+    width: max-content;
+    margin-bottom: 5px;
+}
+
+.container .post-link {
+    color: #195faa;
+    text-decoration: underline;
+}
+
+.post-meta, .post-share {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.post-meta > *, .post-share > * {
+    margin-right: 1.25em;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .post-meta > *, .post-share > * {
+        margin-bottom: 1em;
+    }
+}
