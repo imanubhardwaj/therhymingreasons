@@ -24,24 +24,24 @@ export default class HomePage extends React.Component {
                 <Head>
                     {/*HTML Meta Tags*/}
                     <title>The Rhyming Reasons | A Poetry Blog</title>
-                    <meta name="description" content="Emotions and Words."/>
+                    <meta name="description" content="Love Poetry? Avenge your thirst for rhymes by reading the soulful words dipped in love at The Rhyming Reasons."/>
 
                     {/*Google / Search Engine Tags*/}
                     <meta itemprop="name" content="The Rhyming Reasons | A Poetry Blog"/>
-                    <meta itemprop="description" content="Emotions and Words."/>
+                    <meta itemprop="description" content="Love Poetry? Avenge your thirst for rhymes by reading the soulful words dipped in love at The Rhyming Reasons."/>
                     <meta itemprop="image" content="https://blog.manubhardwaj.in/images/logo.png"/>
 
                     {/*Facebook Meta Tags*/}
                     <meta property="og:url" content="https://blog.manubhardwaj.in"/>
                     <meta property="og:type" content="website"/>
                     <meta property="og:title" content="The Rhyming Reasons | A Poetry Blog"/>
-                    <meta property="og:description" content="Emotions and Words."/>
+                    <meta property="og:description" content="Love Poetry? Avenge your thirst for rhymes by reading the soulful words dipped in love at The Rhyming Reasons."/>
                     <meta property="og:image" content="https://blog.manubhardwaj.in/images/logo.png"/>
 
                     {/*Twitter Meta Tags*/}
                     <meta name="twitter:card" content="summary_large_image"/>
                     <meta name="twitter:title" content="The Rhyming Reasons | A Poetry Blog"/>
-                    <meta name="twitter:description" content="Emotions and Words."/>
+                    <meta name="twitter:description" content="Love Poetry? Avenge your thirst for rhymes by reading the soulful words dipped in love at The Rhyming Reasons."/>
                     <meta name="twitter:image" content="https://blog.manubhardwaj.in/images/logo.png"/>
 
                     {/*Canonical Tag*/}

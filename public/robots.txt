@@ -1,3 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
+Sitemap: https://blog.manubhardwaj.in/api/sitemap
 User-agent: *
 Disallow:
