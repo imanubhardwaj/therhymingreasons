@@ -27,6 +27,7 @@
 }
 
 .container .content {
+    white-space: pre-line;
     width: max-content;
     margin-bottom: 5px;
 }

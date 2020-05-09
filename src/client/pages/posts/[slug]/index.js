@@ -1,17 +1,16 @@
 import React from 'react';
 import {withRouter} from 'next/router';
 import Head from "next/head";
-import moment from "moment";
 import Post from "../../../components/post/post";
 import Comment from "../../../components/comment/comment";
-import Firebase from "../../../services/firebase";
+import ApiService from "../../../services/api";
 import HelperUtils from "../../../utils/helper";
 import './post-page.css';
 
 class PostPage extends React.Component {
     static async getInitialProps({query, req}) {
         const {slug} = query;
-        const post = await Firebase.getPost(slug);
+        const post = await ApiService.getPost(slug);
         const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
         return {post, slug, userAgent};
     }
@@ -19,7 +18,7 @@ class PostPage extends React.Component {
     constructor(props) {
         super(props);
 
-        ({slug: this.slug, post: this.post, router: this.router, userAgent: this.userAgent} = props);
+        ({post: this.post, router: this.router, userAgent: this.userAgent} = props);
 
         this.state = {invalidComment: true};
 
@@ -35,7 +34,6 @@ class PostPage extends React.Component {
             return;
         }
         HelperUtils.setViewableContentSizeCssProperty();
-        Firebase.updatePostViewCount(this.slug, (this.post.views || 0) + 1);
         this.addInputHandlers();
     }
 
@@ -57,11 +55,9 @@ class PostPage extends React.Component {
         const [name, comment] = [this.form.name.current.value, this.form.comment.current.value];
         const data = {
             name,
-            comment,
-            date: moment().unix(),
-            isVerified: false
+            text: comment,
         };
-        this.subscription = Firebase.postComment(this.slug, data).then(this.clearInputs.bind(this));
+        this.subscription = ApiService.postComment(this.post._id, data).then(this.clearInputs.bind(this));
     }
 
     clearInputs() {
@@ -78,6 +74,7 @@ class PostPage extends React.Component {
                     {/*HTML Meta Tags*/}
                     <title>{post.title}</title>
                     <meta name="description" content={HelperUtils.getMetaDescription(post.content)}/>
+                    <meta name="keywords" content="rhymes,reason,poems,poetry,manu" />
 
                     {/*Google / Search Engine Tags*/}
                     <meta itemprop="name" content={post.title}/>
@@ -121,7 +118,7 @@ class PostPage extends React.Component {
                         Post Comment
                     </button>
                 </div>
-                {post.comments && this.getPostComments(post.comments)}
+                {!!post.comments.length && this.getPostComments(post.comments)}
             </div>
         );
     }
@@ -130,7 +127,7 @@ class PostPage extends React.Component {
         return (
             <div className="comments-list">
                 <p className="heading">Comments</p>
-                {comments.map(comment => <Comment key={comment.date} comment={comment}/>)}
+                {comments.map(comment => <Comment key={comment._id} comment={comment}/>)}
             </div>
         );
     }

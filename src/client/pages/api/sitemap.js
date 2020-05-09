@@ -1,6 +1,6 @@
 import '../../lib/firebase';
 import builder from 'xmlbuilder';
-import Firebase from "../../services/firebase";
+import ApiService from "../../services/api";
 
 function formatDate(date) {
     let d = new Date(date),
@@ -17,7 +17,7 @@ function formatDate(date) {
 }
 
 export default async (req, res) => {
-    const poems = await Firebase.getPosts();
+    const poems = await ApiService.getPosts();
 
     const doc = builder.create('urlset')
         .att('xmlns:xsi', 'http://www.sitemaps.org/schemas/sitemap/0.9')
@@ -29,7 +29,7 @@ export default async (req, res) => {
         doc.ele('url')
             .ele('loc').txt("https://blog.manubhardwaj.in/posts/" + poem.slug).up()
             .ele('priority').txt('0.7').up()
-            .ele('lastmod').txt(formatDate(new Date(poem.date))).up()
+            .ele('lastmod').txt(formatDate(new Date(poem.createdAt))).up()
             .ele('changefreq').txt('Weekly').up();
     });
 

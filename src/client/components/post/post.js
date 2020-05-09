@@ -17,7 +17,7 @@ export default function Post(props) {
     let {content} = post;
     const {minimize} = props;
     if (minimize) {
-        const secondIndex = StringUtils.getPosition(content, '<br><br>', 2);
+        const secondIndex = StringUtils.getPosition(content, '\n\n', 2);
         content = `${content.substring(0, secondIndex)}`;
     }
 
@@ -37,14 +37,14 @@ export default function Post(props) {
         <div className="post">
             <h1 className="title">{post.title}️</h1>
             <div className="container">
-                <p dangerouslySetInnerHTML={{__html: content}} className="content"></p>
+                <p className="content">{content}</p>
                 {minimize &&
                 <Link href={`/posts/${post.slug}`}><a className="post-link link">Read Full Poem</a></Link>}
             </div>
             <IconText icon="eye" text={`${post.views} Views`}/>
             <div className="post-meta">
                 <IconText icon="user" text={post.author}/>
-                <IconText icon="clock" text={moment(post.date).format('MMMM DD, YYYY')}/>
+                <IconText icon="clock" text={moment(post.createdAt).format('MMMM DD, YYYY')}/>
                 <IconText icon="tags" text={post.tags}/>
                 <div className="clickable" onClick={openPost}><IconText icon="comment" text="Comment"/></div>
             </div>

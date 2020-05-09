@@ -2,7 +2,7 @@ import React from 'react';
 import Head from "next/head";
 import Spinner from "../../components/spinner/spinner";
 import Post from "../../components/post/post";
-import Firebase from "../../services/firebase";
+import ApiService from "../../services/api";
 import HelperUtils from "../../utils/helper";
 import './home.css';
 
@@ -14,7 +14,7 @@ export default class HomePage extends React.Component {
 
     componentDidMount() {
         HelperUtils.setViewableContentSizeCssProperty();
-        this.subscription = Firebase.getPosts();
+        this.subscription = ApiService.getPosts();
         this.subscription.then(posts => this.setState({posts, hideSpinner: true}));
     }
 
@@ -25,6 +25,7 @@ export default class HomePage extends React.Component {
                     {/*HTML Meta Tags*/}
                     <title>The Rhyming Reasons | A Poetry Blog</title>
                     <meta name="description" content="Love Poetry? Avenge your thirst for rhymes by reading the soulful words dipped in love at The Rhyming Reasons."/>
+                    <meta name="keywords" content="rhymes,reason,poems,poetry,manu" />
 
                     {/*Google / Search Engine Tags*/}
                     <meta itemprop="name" content="The Rhyming Reasons | A Poetry Blog"/>
@@ -49,7 +50,7 @@ export default class HomePage extends React.Component {
                 </Head>
                 <div className="posts-list">
                     {!this.state.hideSpinner && <Spinner/>}
-                    {this.state.posts.map(post => <Post post={post} minimize={true} key={post.date}/>)}
+                    {this.state.posts.map(post => <Post post={post} minimize={true} key={post._id}/>)}
                 </div>
             </div>
         );

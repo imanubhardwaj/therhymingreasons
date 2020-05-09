@@ -18,6 +18,7 @@
 }
 
 .comment p {
+    white-space: pre-line;
     font-size: 1em;
     margin-top: 0;
 }
