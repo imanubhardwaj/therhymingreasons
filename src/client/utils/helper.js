@@ -26,7 +26,7 @@ export default class HelperUtils {
         return (value / Math.pow(1000, exp)).toFixed(decimals) + suffixes[exp - 1];
     };
 
-    static getMetaDescription = string => string.replace(/\n/g, '').substring(0, 160);
+    static getMetaDescription = string => `${string.replace(/\n/g, '').substring(0, 160)}...`;
 
     static setViewableContentSizeCssProperty() {
         const vh = window.innerHeight * 0.01;
