@@ -6,7 +6,7 @@
     align-items: baseline;
 }
 
-.footer span.label::before {
+.footer div.label::before {
     background: #767676;
     content: "\020";
     display: block;

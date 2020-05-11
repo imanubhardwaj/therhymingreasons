@@ -5,7 +5,7 @@ import './footer.css';
 export default function Footer() {
     return (
         <div className="footer">
-            <span className="label">The Rhyming Reasons &#169; 2020</span>
+            <div className="label"><a href="https://blog.manubhardwaj.in/">The Rhyming Reasons</a> &#169; 2020</div>
             <div className="social-links">
                 <IconLink icon="facebook" color="#3b5998" size="2x"
                           link="https://www.facebook.com/therhymingreasons/"/>

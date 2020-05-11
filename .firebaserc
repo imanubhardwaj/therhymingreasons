@@ -1,6 +1,5 @@
 {
   "projects": {
-    "demo": "next-react-630fd",
-    "nextjs": "therhymingreasons"
+    "production": "therhymingreason"
   }
 }
