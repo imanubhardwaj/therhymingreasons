@@ -1,4 +1,3 @@
-import '../../lib/firebase';
 import builder from 'xmlbuilder';
 import ApiService from "../../services/api";
 

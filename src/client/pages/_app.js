@@ -1,8 +1,7 @@
 import React from "react";
-import '../lib/firebase';
-import '../style.css';
 import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
+import '../style.css';
 
 function MyApp({Component, pageProps}) {
     return (
