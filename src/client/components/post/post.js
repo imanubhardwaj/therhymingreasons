@@ -1,12 +1,12 @@
-import React from 'react';
-import Link from 'next/link';
-import {useRouter} from 'next/router';
-import moment from 'moment';
+import React from "react";
+import Link from "next/link";
+import {useRouter} from "next/router";
+import moment from "moment";
 import IconText from "../icon-text/icon-text";
 import IconLink from "../icon-link/icon-link";
 import StringUtils from "../../utils/string";
 import HelperUtils from "../../utils/helper";
-import './post.css';
+import "./post.css";
 
 export default function Post(props) {
     const post = props.post || {};
@@ -17,14 +17,14 @@ export default function Post(props) {
     let {content} = post;
     const {minimize} = props;
     if (minimize) {
-        const secondIndex = StringUtils.getPosition(content, '\n\n', 2);
+        const secondIndex = StringUtils.getPosition(content, "\n\n", 2);
         content = `${content.substring(0, secondIndex)}`;
     }
 
     // Share Urls
     const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=https://blog.manubhardwaj.in/posts/${post.slug}&t=${encodeURI(post.title)}`;
     const twitterUrl = `https://twitter.com/intent/tweet?url=https://blog.manubhardwaj.in/posts/${post.slug}&text=${encodeURI(post.title)}`;
-    const mailUrl = `mailto:?subject=${encodeURI(post.title + ' by The Rhyming Reasons')}&body=${encodeURI('Read ' + post.title + ' at https://blog.manubhardwaj.in/posts/' + post.slug)}`;
+    const mailUrl = `mailto:?subject=${encodeURI(post.title + " by The Rhyming Reasons")}&body=${encodeURI("Read " + post.title + " at https://blog.manubhardwaj.in/posts/" + post.slug)}`;
     const whatsappText = `%2AThe%20Rhyming%20Reasons%2A%0A%0A${encodeURI(post.title)}%0A%0Ahttps://blog.manubhardwaj.in/posts/${post.slug}`;
     let whatsappUrl = `https://wa.me?text=${whatsappText}`;
     if (HelperUtils.isMobile(props.userAgent)) {
@@ -41,10 +41,10 @@ export default function Post(props) {
                 {minimize &&
                 <Link href={`/posts/${post.slug}`}><a className="post-link link">Read Full Poem</a></Link>}
             </div>
-            <IconText icon="eye" text={`${post.views} Views`}/>
+            <IconText icon="eye" text={`${HelperUtils.viewCount(post.views, 2)} Views`}/>
             <div className="post-meta">
                 <IconText icon="user" text={post.author}/>
-                <IconText icon="clock" text={moment(post.createdAt).format('MMMM DD, YYYY')}/>
+                <IconText icon="clock" text={moment(post.createdAt).format("MMMM DD, YYYY")}/>
                 <IconText icon="tags" text={post.tags}/>
                 <div className="clickable" onClick={openPost}><IconText icon="comment" text="Comment"/></div>
             </div>

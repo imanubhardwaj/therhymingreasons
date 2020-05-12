@@ -1,17 +1,17 @@
-import React from 'react';
-import {withRouter} from 'next/router';
+import React from "react";
+import {withRouter} from "next/router";
 import Head from "next/head";
 import Post from "../../../components/post/post";
 import Comment from "../../../components/comment/comment";
 import ApiService from "../../../services/api";
 import HelperUtils from "../../../utils/helper";
-import './post-page.css';
+import "./post-page.css";
 
 class PostPage extends React.Component {
     static async getInitialProps({query, req}) {
         const {slug} = query;
         const post = await ApiService.getPost(slug);
-        const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
+        const userAgent = req ? req.headers["user-agent"] : navigator.userAgent;
         return {post, slug, userAgent};
     }
 
@@ -30,7 +30,7 @@ class PostPage extends React.Component {
 
     componentDidMount() {
         if (!this.post) {
-            this.router.replace('/404');
+            this.router.replace("/404");
             return;
         }
         HelperUtils.setViewableContentSizeCssProperty();
@@ -40,7 +40,7 @@ class PostPage extends React.Component {
     addInputHandlers() {
         const refs = Object.keys(this.form);
         refs.forEach(ref => {
-            this.form[ref].current.addEventListener('input', event => {
+            this.form[ref].current.addEventListener("input", event => {
                 this.validateCommentForm();
             });
         });

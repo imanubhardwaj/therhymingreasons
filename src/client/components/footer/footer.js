@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import IconLink from "../icon-link/icon-link";
-import './footer.css';
+import "./footer.css";
 
 export default function Footer() {
     return (

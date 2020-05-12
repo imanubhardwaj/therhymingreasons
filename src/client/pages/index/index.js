@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import Head from "next/head";
 import Spinner from "../../components/spinner/spinner";
 import Post from "../../components/post/post";
 import ApiService from "../../services/api";
 import HelperUtils from "../../utils/helper";
-import './home.css';
+import "./home.css";
 
 export default class HomePage extends React.Component {
     constructor(props) {

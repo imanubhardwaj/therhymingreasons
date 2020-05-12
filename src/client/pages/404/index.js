@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import './invalid.css';
+import "./invalid.css";
 
 export default function InvalidPage() {
     return (

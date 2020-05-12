@@ -1,12 +1,12 @@
-import React from 'react';
-import {useRouter} from 'next/router';
-import Link from 'next/link';
-import './header.css';
+import React from "react";
+import {useRouter} from "next/router";
+import Link from "next/link";
+import "./header.css";
 
 export default function Header() {
     const router = useRouter();
     const path = router.pathname;
-    const useHeadingTag = path === '/' || path === '/about';
+    const useHeadingTag = path === "/" || path === "/about";
     const link = <Link href="/"><a className="link">The Rhyming Reasons</a></Link>;
     const title = useHeadingTag ? <h1 className="title">{link}</h1> : <h2 className="title">{link}</h2>;
     return (

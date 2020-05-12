@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import Head from "next/head";
 import HelperUtils from "../../utils/helper";
 import StringUtils from "../../utils/string";
-import './about.css';
+import "./about.css";
 
 export default class AboutPage extends React.Component {
     constructor(props) {

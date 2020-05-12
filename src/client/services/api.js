@@ -3,12 +3,12 @@ import CancelablePromise from "../utils/cancelable-promise";
 
 class ApiService {
     constructor() {
-        axios.defaults.baseURL = 'https://trr-backend.herokuapp.com/api/v1'
+        axios.defaults.baseURL = "https://trr-backend.herokuapp.com/api/v1"
     }
 
     getPosts() {
         return new CancelablePromise((resolve, reject) => {
-            axios.get('posts').then(res => resolve(res.data.data), error => reject(error.message));
+            axios.get("posts").then(res => resolve(res.data.data), error => reject(error.message));
         });
     }
 

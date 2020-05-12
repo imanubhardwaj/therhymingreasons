@@ -9,7 +9,7 @@ export default class HelperUtils {
 
     static viewCount = (value, decimals) => {
         let exp;
-        const suffixes = ['K', 'M', 'G', 'T', 'P', 'E'];
+        const suffixes = ["K", "M", "G", "T", "P", "E"];
 
         value = parseInt(value, 10);
 
@@ -26,10 +26,10 @@ export default class HelperUtils {
         return (value / Math.pow(1000, exp)).toFixed(decimals) + suffixes[exp - 1];
     };
 
-    static getMetaDescription = string => `${string.replace(/\n/g, '').substring(0, 160)}...`;
+    static getMetaDescription = string => `${string.replace(/\n/g, "").substring(0, 160)}...`;
 
     static setViewableContentSizeCssProperty() {
         const vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        document.documentElement.style.setProperty("--vh", `${vh}px`);
     }
 }
