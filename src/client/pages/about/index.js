@@ -22,7 +22,7 @@ export default class AboutPage extends React.Component {
                     <meta name="title" content="About | The Rhyming Reasons"/>
                     <meta name="description" content="I have been extremely sluggish in expressing my thoughts, though things have started to change lately. But back then, things were terrible. I was afraid of being..."/>
                     <meta name="keywords" content="rhymes,reason,poems,poetry,manu" />
-                    <link rel="canonical" href="https://blog.manubhardwaj.in/about"/>
+                    <link rel="canonical" href="https://therhymingreasons.com/about"/>
                 </Head>
                 <div className="content">
                     <h2 className="about-heading">About the Author</h2>

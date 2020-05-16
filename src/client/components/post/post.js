@@ -22,10 +22,10 @@ export default function Post(props) {
     }
 
     // Share Urls
-    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=https://blog.manubhardwaj.in/posts/${post.slug}&t=${encodeURI(post.title)}`;
-    const twitterUrl = `https://twitter.com/intent/tweet?url=https://blog.manubhardwaj.in/posts/${post.slug}&text=${encodeURI(post.title)}`;
-    const mailUrl = `mailto:?subject=${encodeURI(post.title + " by The Rhyming Reasons")}&body=${encodeURI("Read " + post.title + " at https://blog.manubhardwaj.in/posts/" + post.slug)}`;
-    const whatsappText = `%2AThe%20Rhyming%20Reasons%2A%0A%0A${encodeURI(post.title)}%0A%0Ahttps://blog.manubhardwaj.in/posts/${post.slug}`;
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=https://therhymingreasons.com/posts/${post.slug}&t=${encodeURI(post.title)}`;
+    const twitterUrl = `https://twitter.com/intent/tweet?url=https://therhymingreasons.com/posts/${post.slug}&text=${encodeURI(post.title)}`;
+    const mailUrl = `mailto:?subject=${encodeURI(post.title + " by The Rhyming Reasons")}&body=${encodeURI("Read " + post.title + " at https://therhymingreasons.com/posts/" + post.slug)}`;
+    const whatsappText = `%2AThe%20Rhyming%20Reasons%2A%0A%0A${encodeURI(post.title)}%0A%0Ahttps://therhymingreasons.com/posts/${post.slug}`;
     let whatsappUrl = `https://wa.me?text=${whatsappText}`;
     if (HelperUtils.isMobile(props.userAgent)) {
         whatsappUrl = `whatsapp://send?text=${whatsappText}`;

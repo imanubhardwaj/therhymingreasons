@@ -82,7 +82,7 @@ class PostPage extends React.Component {
                     {post.img && <meta itemprop="image" name="og:image" content={post.img}/>}
 
                     {/*Facebook Meta Tags*/}
-                    <meta property="og:url" content={`https://blog.manubhardwaj.in/posts/${post.slug}`}/>
+                    <meta property="og:url" content={`https://therhymingreasons.com/posts/${post.slug}`}/>
                     <meta property="og:type" content="website"/>
                     <meta property="og:title" content={post.title}/>
                     <meta property="og:description" content={HelperUtils.getMetaDescription(post.content)}/>
@@ -95,7 +95,7 @@ class PostPage extends React.Component {
                     {post.img && <meta name="twitter:image" content={post.img}/>}
 
                     {/*Canonical Tag*/}
-                    <link rel="canonical" href={`https://blog.manubhardwaj.in/posts/${post.slug}`}/>
+                    <link rel="canonical" href={`https://therhymingreasons.com/posts/${post.slug}`}/>
                 </Head>
                 {this.getPostPageContent(post)}
             </div>
