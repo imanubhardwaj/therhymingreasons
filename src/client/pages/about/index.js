@@ -31,7 +31,7 @@ export default class AboutPage extends React.Component {
                     <p dangerouslySetInnerHTML={{__html: blog}}></p>
                     <h2 className="contact-heading">Want to Connect? Feel free to drop in and Say Hi !</h2>
                     <p>Phone: +91 97182-82486</p>
-                    <p>Email: <a className="mail-link" href="mailto:immanubhardwaj@gmail.com">immanubhardwaj@gmail.com</a>
+                    <p>Email: <a className="mail-link" href="mailto:therhymingreasons@outlook.com">therhymingreasons@outlook.com</a>
                     </p>
                 </div>
             </div>

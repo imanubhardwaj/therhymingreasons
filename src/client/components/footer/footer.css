@@ -31,6 +31,14 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+    .footer {
+        flex-direction: column;
+    }
+
+    .footer > div.label {
+        margin-bottom: 20px;
+    }
+
     .footer .social-links > * {
         margin-right: 15px;
     }
