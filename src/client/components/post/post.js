@@ -44,7 +44,7 @@ export default function Post(props) {
             <IconText icon="eye" text={`${HelperUtils.viewCount(post.views, 2)} Views`}/>
             <div className="post-meta">
                 <IconText icon="user" text={post.author}/>
-                <IconText icon="clock" text={moment(post.createdAt).format("MMMM DD, YYYY")}/>
+                <IconText icon="clock" text={moment(post.publishDate).format("MMMM DD, YYYY")}/>
                 <IconText icon="tags" text={post.tags}/>
                 <div className="clickable" onClick={openPost}><IconText icon="comment" text="Comment"/></div>
             </div>
