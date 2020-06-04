@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
 import "../style.css";
@@ -152,6 +153,12 @@ function MyApp({Component, pageProps}) {
                 </symbol>
             </svg>
             <img className="bg-image" src="/images/background.webp" alt="Sparrows flying out of tree"/>
+            <Head>
+                <title>The Rhyming Reasons | A Poetry Blog</title>
+
+                {/*Google Adsense*/}
+                <script data-ad-client="ca-pub-6673066501301411" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"/>
+            </Head>
             <Header/>
             <Component {...pageProps} />
             <Footer/>
