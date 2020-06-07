@@ -26,7 +26,7 @@ export default async (req, res) => {
 
     poems.forEach(poem => {
         doc.ele("url")
-            .ele("loc").txt("https://therhymingreasons.com/posts/" + poem.slug).up()
+            .ele("loc").txt(`${process.env.BASE_URL}/posts/${poem.slug}`).up()
             .ele("priority").txt(poem.indexPriority.toFixed(1)).up()
             .ele("lastmod").txt(formatDate(new Date(poem.publishDate))).up()
             .ele("changefreq").txt("Weekly").up();

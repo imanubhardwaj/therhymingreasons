@@ -5,7 +5,7 @@ import "./footer.css";
 export default function Footer() {
     return (
         <div className="footer">
-            <div className="label"><a href="https://therhymingreasons.com/">The Rhyming Reasons</a> &#169; 2020</div>
+            <div className="label"><a href={`${process.env.BASE_URL}`}>The Rhyming Reasons</a> &#169; 2020</div>
             <div className="social-links">
                 <IconLink icon="instagram" color="#C13584" size="2x"
                           link="https://www.instagram.com/the_rhyming_reasons/"/>

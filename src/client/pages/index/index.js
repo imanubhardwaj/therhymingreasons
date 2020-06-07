@@ -28,25 +28,25 @@ export default class HomePage extends React.Component {
                     <meta name="keywords" content="rhymes,reason,poems,poetry,manu" />
 
                     {/*Google / Search Engine Tags*/}
-                    <meta itemprop="name" content="The Rhyming Reasons | A Poetry Blog"/>
-                    <meta itemprop="description" content="Love Poetry? Avenge your thirst for rhymes by reading the soulful words dipped in love at The Rhyming Reasons."/>
-                    <meta itemprop="image" content="https://therhymingreasons.com/images/logo.png"/>
+                    <meta itemProp="name" content="The Rhyming Reasons | A Poetry Blog"/>
+                    <meta itemProp="description" content="Love Poetry? Avenge your thirst for rhymes by reading the soulful words dipped in love at The Rhyming Reasons."/>
+                    <meta itemProp="image" content={`${process.env.BASE_URL}/images/logo.png`}/>
 
                     {/*Facebook Meta Tags*/}
-                    <meta property="og:url" content="https://therhymingreasons.com"/>
+                    <meta property="og:url" content={`${process.env.BASE_URL}`}/>
                     <meta property="og:type" content="website"/>
                     <meta property="og:title" content="The Rhyming Reasons | A Poetry Blog"/>
                     <meta property="og:description" content="Love Poetry? Avenge your thirst for rhymes by reading the soulful words dipped in love at The Rhyming Reasons."/>
-                    <meta property="og:image" content="https://therhymingreasons.com/images/logo.png"/>
+                    <meta property="og:image" content={`${process.env.BASE_URL}/images/logo.png`}/>
 
                     {/*Twitter Meta Tags*/}
                     <meta name="twitter:card" content="summary_large_image"/>
                     <meta name="twitter:title" content="The Rhyming Reasons | A Poetry Blog"/>
                     <meta name="twitter:description" content="Love Poetry? Avenge your thirst for rhymes by reading the soulful words dipped in love at The Rhyming Reasons."/>
-                    <meta name="twitter:image" content="https://therhymingreasons.com/images/logo.png"/>
+                    <meta name="twitter:image" content={`${process.env.BASE_URL}/images/logo.png`}/>
 
                     {/*Canonical Tag*/}
-                    <link rel="canonical" href="https://therhymingreasons.com"/>
+                    <link rel="canonical" href={`${process.env.BASE_URL}`}/>
                 </Head>
                 <div className="posts-list">
                     {!this.state.hideSpinner && <Spinner/>}

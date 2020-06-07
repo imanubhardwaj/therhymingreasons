@@ -82,7 +82,7 @@ class PostPage extends React.Component {
                     {post.img && <meta itemprop="image" name="og:image" content={post.img}/>}
 
                     {/*Facebook Meta Tags*/}
-                    <meta property="og:url" content={`https://therhymingreasons.com/posts/${post.slug}`}/>
+                    <meta property="og:url" content={`/posts/${post.slug}`}/>
                     <meta property="og:type" content="website"/>
                     <meta property="og:title" content={post.title}/>
                     <meta property="og:description" content={HelperUtils.getMetaDescription(post.content)}/>
@@ -95,7 +95,7 @@ class PostPage extends React.Component {
                     {post.img && <meta name="twitter:image" content={post.img}/>}
 
                     {/*Canonical Tag*/}
-                    <link rel="canonical" href={`https://therhymingreasons.com/posts/${post.slug}`}/>
+                    <link rel="canonical" href={`${process.env.BASE_URL}/posts/${post.slug}`}/>
                 </Head>
                 {this.getPostPageContent(post)}
             </div>
@@ -105,7 +105,7 @@ class PostPage extends React.Component {
     getPostPageContent(post) {
         return (
             <div>
-                <Post post={post} minimize={false} userAgent={this.userAgent}/>
+                <Post post={post} minimize={false} userAgent={this.userAgent} useH1={true}/>
                 <div id="comment-box">
                     <p className="heading">Leave a comment</p>
                     <div className="input-container name">
